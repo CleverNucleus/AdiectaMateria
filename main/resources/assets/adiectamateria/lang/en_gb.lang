@@ -1,0 +1,31 @@
+itemGroup.tab_adiectamateria=Adiecta Materia
+
+item.book.name=Lexica Materia
+item.infinite_water.name=Water in a Glass
+item.infinite_lava.name=Lava in a Glass
+item.pulvis_dust.name=Catalytic Powder
+item.altera_dust.name=Catalytic Powder
+item.light_orb.name=Fire in a Glass
+item.dark_orb.name=Nighttime in a Glass
+item.day_orb.name=Daytime in a Glass
+item.electric_orb.name=Lightning in a Glass
+item.rain_orb.name=Rain in a Glass
+item.ender_orb.name=The End in a Glass
+item.rice_paper.name=Rice Paper
+item.rice_seed.name=Rice
+item.rye_raw.name=Cooked Rice
+item.rye_cooked.name=Onigiri
+item.god_juice.name=God Juice
+item.greater_jeweled_apple.name=Greater Jeweled Apple
+item.trinket_speed.name=Maiorem Trinket
+item.trinket_heal.name=Maiorem Trinket
+item.trinket_water.name=Maiorem Trinket
+item.trinket_invisibility.name=Maiorem Trinket
+item.trinket_vision.name=Maiorem Trinket
+item.trinket_saturation.name=Maiorem Trinket
+
+tile.paperwall.name=Paper Wall
+tile.rice_block.name=Rice Paper
+tile.ceramic.name=Ceramic
+tile.rice.name=Rice Crop
+tile.sandlamp.name=Sand Lamp

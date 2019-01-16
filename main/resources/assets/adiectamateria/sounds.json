@@ -1,0 +1,38 @@
+{
+	"transform":
+	{
+		"category": "neutral",
+		"subtitle": "transform",
+		"sounds": [{ "name": "adiectamateria:transform", "stream": true}]
+	},
+	"daytime":
+	{
+		"category": "neutral",
+		"subtitle": "daytime",
+		"sounds": [{ "name": "adiectamateria:daytime", "stream": true}]
+	},
+	"nighttime":
+	{
+		"category": "neutral",
+		"subtitle": "nighttime",
+		"sounds": [{ "name": "adiectamateria:nighttime", "stream": true}]
+	},
+	"strike":
+	{
+		"category": "neutral",
+		"subtitle": "strike",
+		"sounds": [{ "name": "adiectamateria:strike", "stream": true}]
+	},
+	"woosh":
+	{
+		"category": "neutral",
+		"subtitle": "woosh",
+		"sounds": [{ "name": "adiectamateria:woosh", "stream": true}]
+	},
+	"up":
+	{
+		"category": "neutral",
+		"subtitle": "up",
+		"sounds": [{ "name": "adiectamateria:up", "stream": true}]
+	}
+}
