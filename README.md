@@ -34,4 +34,4 @@ A Minecraft mod designed to add custom utilities &amp; material effects to a pri
 - ~the book can't be crafted. You get it by right clicking a bookshelf with a Catalytic Dust(*Altera Impirium*) - think of Thaumcraft 4/5.
 - ~The trinkets can't be crafted, the only way of obtaining them is to kill zombies or skeletons. Note (again) that they are literally useless without Baubles, and must be equipped in their respective Bauble slots to give the active effects. Effects include constant application of *Instant Health* (Really OP), *Saturation* (You don't need to eat), *Night Vision*, *Speed II* (move speed not mining speed), *Invisibility* and *water breathing*.
 - ~Use JEI / NEI for a list of crafting / smelting recipes, and the book added for a list of Altera Impirium right click recipes.
-
+- +Added a modID logo file (finally).
