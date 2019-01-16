@@ -18,8 +18,8 @@ A Minecraft mod designed to add custom utilities &amp; material effects to a pri
 - +Added custom sound effects for every item action.
 - +Added more world crafting recipes to keep up to date with the aditional dye blocks in MC 1.12.2 (e.g. Glazed Terracotta).
 - +Added a simple guide book that catalogues all the world crafting recipes *Altera Impirium* can do (including all dye recipes such as white wool to orange wool etc.).
-- +Added slightly new textures and a gui feature to help wher JEI/NEI is unable.
-- +Added compatibility between Thermal Foundations Fluid Transposer and the infinte Water in a jar and Lava in a jar items. They can now be placed in the transposer to provide an infinte source of fluid at the maximum rate possible.
+- +Added slightly new textures and a gui feature to help where JEI/NEI is unable.
+- +Added compatibility between Thermal Foundation's Fluid Transposer and the infinite Water in a jar and Lava in a jar items. They can now be placed in the transposer to provide an infinite source of fluid at the maximum rate possible.
 - -Removed Herobr. - no just kidding lol.
 
 # Dependencies
@@ -27,6 +27,7 @@ A Minecraft mod designed to add custom utilities &amp; material effects to a pri
 
 # Optional Dependencies (Trinkets)
 - Baubles MC 1.12.2 (THIS IS ONLY NEEDED FOR THE TRINKETS TO WORK).
+- ~Baubles *is* recommended; to get the full use out of this mod it is a must, and it is is generally an exceptionally useful mod to have irregardless.
 
 # Dev notes
 - ~Cleaned up all the code and added a comment to every method for easier understanding and reading when next updating.
