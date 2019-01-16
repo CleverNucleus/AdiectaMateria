@@ -1,0 +1,7 @@
+{
+"transform": {"category": "master","sounds": [{"name": "transform","stream": false}]},
+   "woosh": {"category": "master","sounds": [{"name": "woosh","stream": false}]},
+   "daytime": {"category": "master","sounds": [{"name": "daytime","stream": false}]},
+   "strike": {"category": "master","sounds": [{"name": "strike","stream": false}]},
+   "nighttime": {"category": "master","sounds": [{"name": "nighttime","stream": false}]}
+}
