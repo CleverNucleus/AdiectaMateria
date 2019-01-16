@@ -13,7 +13,7 @@ A Minecraft mod designed to add custom utilities &amp; material effects to a pri
 - ~Changed a few potion effects around.
 - ~Changed most of the fundemental item crafting recipes (e.g. glowstone can now be made from 1xPulvis Impirium and 2xRedstone).
 - ~Changed the item that performs world crafting from Catalytic Dust (*Pulvis Impirium*) to Catalytic Dust (*Altera Impirium*).
-- +Added an item Catalytic Dust (*Pulvis Impirium*). This item is a higher status version of Pulvis Impirium and right clicks blocks to change them (think of the philosopher's stone from EE2).
+- +Added an item Catalytic Dust (*Altera Impirium*). This item is a higher status version of Pulvis Impirium and right clicks blocks to change them (think of the philosopher's stone from EE2).
 - +Added an item *The End in a Jar*. When used this will teleport every mob in a 32 block radius to the mobs original position + 100 blocks in the air, making them all die from fall damage (has 24 uses).
 - +Added custom sound effects for every item action.
 - +Added more world crafting recipes to keep up to date with the aditional dye blocks in MC 1.12.2 (e.g. Glazed Terracotta).
