@@ -1,0 +1,16 @@
+[
+{
+  "modid": "adiectamateria",
+  "name": "Adiecta Materia",
+  "description": "Adds a few custom blocks and items, private mod.",
+  "version": "2.1.5",
+  "mcversion": "1.12.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["CleverNucleus"],
+  "credits": "CleverNucleus",
+  "logoFile": "assets/adiectamateria/textures/gui/logo.png",
+  "screenshots": [],
+  "dependencies": [Baubles]
+}
+]
