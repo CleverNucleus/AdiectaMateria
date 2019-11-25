@@ -1,0 +1,7 @@
+{
+    "parent": "block/pane_side",
+    "textures": {
+        "edge": "adiectamateria:blocks/paperwall_top",
+        "pane": "adiectamateria:blocks/paperwall"
+    }
+}
