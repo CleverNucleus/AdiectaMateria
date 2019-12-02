@@ -1,103 +1,96 @@
 package clevernucleus.adiectamateria.common.util.recipes;
 
 import clevernucleus.adiectamateria.common.item.ItemUnit;
+import clevernucleus.adiectamateria.common.util.Component;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSapling;
+import net.minecraft.block.BlockStone;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Recipes {
 	public static void registerRecipes() {
 		
 		/** Smelting */
-		Smelting.addSmeltingRecipe(Items.FLINT, ItemUnit.MELTY_FLINT);
-		
-		for(ItemStack var : Smelting.getSmeltingMap().keySet()) {
-			GameRegistry.addSmelting(var, Smelting.getSmeltingMap().get(var), 0.3F);
-		}
+		Smelting.addRecipe(new ItemStack(Items.FLINT), new ItemStack(ItemUnit.MELTY_FLINT));
 		
 		/** Crafting */
 		
-		
 		/** Transmuting */
-		Transmuting.addSimpleRecipe(Blocks.GRAVEL, Items.FLINT);
-		Transmuting.addSimpleRecipe(Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM);
-		Transmuting.addSimpleRecipe(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM);
-		Transmuting.addSimpleRecipe(Blocks.BOOKSHELF, ItemUnit.BOOK);
-		Transmuting.addSimpleRecipe(Blocks.ICE, Blocks.FLOWING_WATER);
-		Transmuting.addSimpleRecipe(Blocks.OBSIDIAN, Blocks.FLOWING_LAVA);
-		Transmuting.addSimpleRecipe(Blocks.DIRT, Blocks.GRASS);
-		Transmuting.addSimpleRecipe(Blocks.GRASS, Blocks.DIRT);
-		Transmuting.addSimpleRecipe(Blocks.STONE, Blocks.COBBLESTONE);
-		Transmuting.addSimpleRecipe(Blocks.COBBLESTONE, Blocks.STONE);
-		Transmuting.addSimpleRecipe(Blocks.SOUL_SAND, Blocks.NETHERRACK);
-		Transmuting.addComplexRecipe(Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.OAK), Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.DARK_OAK));
-		Transmuting.addComplexRecipe(Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.DARK_OAK), Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.SPRUCE));
-		Transmuting.addComplexRecipe(Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.SPRUCE), Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.BIRCH));
-		Transmuting.addComplexRecipe(Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.BIRCH), Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.JUNGLE));
-		Transmuting.addComplexRecipe(Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.JUNGLE), Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.ACACIA));
-		Transmuting.addComplexRecipe(Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.ACACIA), Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.OAK));
-		Transmuting.addComplexRecipe(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK), Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK));
-		Transmuting.addComplexRecipe(Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE));
-		Transmuting.addComplexRecipe(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH));
-		Transmuting.addComplexRecipe(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
-		Transmuting.addComplexRecipe(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE), Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA));
-		Transmuting.addComplexRecipe(Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK));
-		Transmuting.addComplexRecipe(Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK), Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.DARK_OAK));
-		Transmuting.addComplexRecipe(Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.DARK_OAK), Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE));
-		Transmuting.addComplexRecipe(Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE), Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.BIRCH));
-		Transmuting.addComplexRecipe(Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.JUNGLE));
-		Transmuting.addComplexRecipe(Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.JUNGLE), Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.ACACIA));
-		Transmuting.addComplexRecipe(Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.ACACIA), Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK));
-		Transmuting.addComplexRecipe(Blocks.NETHERRACK.getDefaultState(), Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND));
-		Transmuting.addComplexRecipe(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND), Blocks.SOUL_SAND.getDefaultState());
-		Transmuting.addComplexRecipe(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND), Blocks.GLASS.getDefaultState());
-		Transmuting.addComplexRecipe(Blocks.GLASS.getDefaultState(), Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND));
+		
+		Transmuting.addRecipe(0, new Component(Blocks.BOOKSHELF), new Component(ItemUnit.BOOK, 1, 0));
+		Transmuting.addRecipe(1, new Component(Blocks.GRAVEL), new Component(Items.FLINT, 1, 0));
+		Transmuting.addRecipe(2, new Component(Blocks.ICE), new Component(Blocks.FLOWING_WATER));
+		Transmuting.addRecipe(3, new Component(Blocks.OBSIDIAN), new Component(Blocks.FLOWING_LAVA));
+		Transmuting.addRecipe(4, new Component(Blocks.DIRT), new Component(Blocks.GRASS));
+		Transmuting.addRecipe(4, new Component(Blocks.GRASS), new Component(Blocks.DIRT));
+		Transmuting.addRecipe(5, new Component(Blocks.STONE).addProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE), new Component(Blocks.COBBLESTONE));
+		Transmuting.addRecipe(5, new Component(Blocks.COBBLESTONE), new Component(Blocks.STONE).addProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE));
+		Transmuting.addRecipe(6, new Component(Blocks.SAND).addProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND), new Component(Blocks.SOUL_SAND));
+		Transmuting.addRecipe(6, new Component(Blocks.SOUL_SAND), new Component(Blocks.NETHERRACK));
+		Transmuting.addRecipe(6, new Component(Blocks.NETHERRACK), new Component(Blocks.SAND).addProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND));
+		
+		Transmuting.addRecipe(7, new Component(Blocks.RED_MUSHROOM), new Component(Blocks.BROWN_MUSHROOM));
+		Transmuting.addRecipe(7, new Component(Blocks.BROWN_MUSHROOM), new Component(Blocks.RED_MUSHROOM));
+		Transmuting.addRecipe(8, new Component(Blocks.PUMPKIN), new Component(Blocks.LIT_PUMPKIN));
+		Transmuting.addRecipe(8, new Component(Blocks.LIT_PUMPKIN), new Component(Blocks.PUMPKIN));
+		
+		Transmuting.addRecipe(9, new Component(Blocks.SAND).addProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND), new Component(Blocks.GLASS));
+		Transmuting.addRecipe(9, new Component(Blocks.GLASS), new Component(Blocks.SAND).addProperty(BlockSand.VARIANT, BlockSand.EnumType.SAND));
+		
+		Transmuting.addRecipe(10, new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.OAK), new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.DARK_OAK));
+		Transmuting.addRecipe(10, new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.DARK_OAK), new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.SPRUCE));
+		Transmuting.addRecipe(10, new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.SPRUCE), new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.BIRCH));
+		Transmuting.addRecipe(10, new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.BIRCH), new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.JUNGLE));
+		Transmuting.addRecipe(10, new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.JUNGLE), new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.ACACIA));
+		Transmuting.addRecipe(10, new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.ACACIA), new Component(Blocks.SAPLING).addProperty(BlockSapling.TYPE, BlockPlanks.EnumType.OAK));
+		
+		Transmuting.addRecipe(11, new Component(Blocks.LOG).addProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK), new Component(Blocks.LOG2).addProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK));
+		Transmuting.addRecipe(11, new Component(Blocks.LOG2).addProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK), new Component(Blocks.LOG).addProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE));
+		Transmuting.addRecipe(11, new Component(Blocks.LOG).addProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE), new Component(Blocks.LOG).addProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH));
+		Transmuting.addRecipe(11, new Component(Blocks.LOG).addProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), new Component(Blocks.LOG).addProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
+		Transmuting.addRecipe(11, new Component(Blocks.LOG).addProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE), new Component(Blocks.LOG2).addProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA));
+		Transmuting.addRecipe(11, new Component(Blocks.LOG2).addProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA), new Component(Blocks.LOG).addProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK));
+		
+		Transmuting.addRecipe(12, new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK), new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.DARK_OAK));
+		Transmuting.addRecipe(12, new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.DARK_OAK), new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE));
+		Transmuting.addRecipe(12, new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE), new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.BIRCH));
+		Transmuting.addRecipe(12, new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.BIRCH), new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.JUNGLE));
+		Transmuting.addRecipe(12, new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.JUNGLE), new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.ACACIA));
+		Transmuting.addRecipe(12, new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.ACACIA), new Component(Blocks.PLANKS).addProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK));
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.addComplexRecipe(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 16 ? 0 : var + 1))));
+			Transmuting.addRecipe(13, new Component(Blocks.WOOL).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.WOOL).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.addComplexRecipe(Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), Blocks.STAINED_GLASS.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 16 ? 0 : var + 1))));
+			Transmuting.addRecipe(14, new Component(Blocks.STAINED_GLASS).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.STAINED_GLASS).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.addComplexRecipe(Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), Blocks.STAINED_GLASS_PANE.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 16 ? 0 : var + 1))));
+			Transmuting.addRecipe(15, new Component(Blocks.STAINED_GLASS_PANE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.STAINED_GLASS_PANE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.addComplexRecipe(Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 16 ? 0 : var + 1))));
+			Transmuting.addRecipe(16, new Component(Blocks.STAINED_HARDENED_CLAY).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.STAINED_HARDENED_CLAY).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.addComplexRecipe(Blocks.CONCRETE_POWDER.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), Blocks.CONCRETE_POWDER.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 16 ? 0 : var + 1))));
-		}
-
-		for(int var = 0; var < 16; var++) {
-			Transmuting.addComplexRecipe(Blocks.CONCRETE.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), Blocks.CONCRETE.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 16 ? 0 : var + 1))));
+			Transmuting.addRecipe(17, new Component(Blocks.CONCRETE_POWDER).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.CONCRETE_POWDER).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.addComplexRecipe(Blocks.CARPET.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), Blocks.CARPET.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 16 ? 0 : var + 1))));
+			Transmuting.addRecipe(18, new Component(Blocks.CONCRETE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.CONCRETE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
-		Transmuting.addBlockException(Blocks.WOOL, 16);
-		Transmuting.addBlockException(Blocks.STAINED_GLASS, 16);
-		Transmuting.addBlockException(Blocks.STAINED_GLASS_PANE, 16);
-		Transmuting.addBlockException(Blocks.STAINED_HARDENED_CLAY, 16);
-		Transmuting.addBlockException(Blocks.CONCRETE_POWDER, 16);
-		Transmuting.addBlockException(Blocks.CONCRETE, 16);
-		Transmuting.addBlockException(Blocks.CARPET, 16);
-		Transmuting.addBlockException(Blocks.PLANKS, 6);
-		Transmuting.addBlockException(Blocks.LOG, 6);
-		Transmuting.addBlockException(Blocks.SAPLING, 6);
+		for(int var = 0; var < 16; var++) {
+			Transmuting.addRecipe(19, new Component(Blocks.CARPET).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.CARPET).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
+		}
 	}
 }

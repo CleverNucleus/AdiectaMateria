@@ -1,25 +1,16 @@
 package clevernucleus.adiectamateria.common.item;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import clevernucleus.adiectamateria.common.AdiectaMateria.Core;
 import clevernucleus.adiectamateria.common.Common;
-import clevernucleus.adiectamateria.common.util.ObjectHolder;
+import clevernucleus.adiectamateria.common.util.Component;
 import clevernucleus.adiectamateria.common.util.interfaces.IHasModel;
-import clevernucleus.adiectamateria.common.util.recipes.Recipes;
 import clevernucleus.adiectamateria.common.util.recipes.Transmuting;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockProperties;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -48,34 +39,69 @@ public class ItemMeltyFlint extends Item implements IHasModel {
 		super.addInformation(par0, par1, par2, par3);
 	}
 	
+	private void transmute(World par0, BlockPos par1, IBlockState par2, Component[] par3) {
+		if(par3[1].hasProperties()) {
+			IBlockState var0;
+			
+			if(par2.getBlock() instanceof BlockLog) {
+				BlockLog.EnumAxis var1 = BlockLog.EnumAxis.fromFacingAxis(EnumFacing.Axis.byName("" + par2.getProperties().get(BlockLog.LOG_AXIS)));
+				
+				var0 = par3[1].getBlock().getDefaultState().withProperty(BlockLog.LOG_AXIS, var1).withProperty(par3[1].getProperty(), par3[1].getType());
+			} else {
+				var0 = par3[1].getBlock().getStateFromMeta(par2.getBlock().getMetaFromState(par2)).withProperty(par3[1].getProperty(), par3[1].getType());
+			}
+			
+			par0.setBlockState(par1, var0);
+		} else {
+			par0.setBlockState(par1, par3[1].getBlock().getStateFromMeta(par2.getBlock().getMetaFromState(par2)));
+		}
+		
+		EntityItem item = new EntityItem(par0, par1.getX(), par1.getY(), par1.getZ(), par3[1].getStack());
+		
+		par0.spawnEntity(item);
+	}
+	
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer par0, World par1, BlockPos par2, EnumHand par3, EnumFacing par4, float par5, float par6, float par7) {
-		ItemStack var0 = par0.getHeldItem(par3);
-		IBlockState var1 = par1.getBlockState(par2);
+		ItemStack stack = par0.getHeldItem(par3);
+		IBlockState state = par1.getBlockState(par2);
 		
-		if(Transmuting.getTransmutingMap().containsKey(var1)) {
+		boolean isMatch = false;
+		
+		for(Component[] var : Transmuting.getArray()) {
+			Component var0 = var[0];
+			Component var1 = var[1];
+			
+			if(state.getBlock() == var0.getBlock()) {
+				if(var0.hasProperties()) {
+					if(state == var0.getBlock().getActualState(state, par1, par2).withProperty(var0.getProperty(), var0.getType()) || state == var0.getBlock().getDefaultState().withProperty(var0.getProperty(), var0.getType())) {
+						isMatch = true;
+						
+						if(!par1.isRemote) {
+							transmute(par1, par2, state, var);
+							
+							break;
+						}
+					}
+				} else {
+					isMatch = true;
+					
+					if(!par1.isRemote) {
+						transmute(par1, par2, state, var);
+						
+						break;
+					}
+				}
+			}
+		}
+		
+		if(isMatch) {
 			if(!par0.capabilities.isCreativeMode) {
-				var0.shrink(1);
+				stack.shrink(1);
 			}
 			
 			Common.proxy(par1.isRemote).spawnParticle(par1, par2, EnumParticleTypes.FLAME, 7);
 			
-			if(!par1.isRemote) {
-				if(Transmuting.getTransmutingMap().get(var1) instanceof IBlockState) {
-					par1.setBlockState(par2, ((IBlockState) Transmuting.getTransmutingMap().get(var1)));
-				} else if(Transmuting.getTransmutingMap().get(var1) instanceof Item) {
-					par1.setBlockState(par2, Blocks.AIR.getDefaultState());
-					
-					EntityItem var2 = new EntityItem(par1, par2.getX(), par2.getY(), par2.getZ(), new ItemStack((Item) Transmuting.getTransmutingMap().get(var1), 1));
-					
-					par1.spawnEntity(var2);
-				}
-			}
-			
-			/*if(var1.getBlock() == Blocks.LOG) {
-				
-				par1.setBlockState(par2, var1.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH));*/
-				
 			par1.playSound(par0, par2, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
 			
 			return EnumActionResult.SUCCESS;

@@ -2,25 +2,17 @@ package clevernucleus.adiectamateria.client.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import clevernucleus.adiectamateria.client.content.LangKeys;
 import clevernucleus.adiectamateria.client.content.Page;
 import clevernucleus.adiectamateria.client.content.Topic;
 import clevernucleus.adiectamateria.common.item.ItemUnit;
+import clevernucleus.adiectamateria.common.util.Component;
 import clevernucleus.adiectamateria.common.util.CycleTimer;
-import clevernucleus.adiectamateria.common.util.ObjectHolder;
 import clevernucleus.adiectamateria.common.util.interfaces.IConstants;
 import clevernucleus.adiectamateria.common.util.recipes.Smelting;
 import clevernucleus.adiectamateria.common.util.recipes.Transmuting;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockNewLog;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiButtonImage;
 import net.minecraft.client.gui.GuiScreen;
@@ -29,7 +21,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -38,11 +29,11 @@ import net.minecraftforge.fml.client.config.HoverChecker;
 public class GuiBook extends GuiScreen {
 	public final ResourceLocation texture = new ResourceLocation(IConstants.MODID, "textures/gui/book.png");
 	
+	private CycleTimer timer = new CycleTimer();
+	
 	private List<GuiButtonImage> buttonArray = new ArrayList<GuiButtonImage>();
 	private List<Topic> topics = new ArrayList<Topic>();
 	private GuiButtonImage buttonPrev, buttonNext;
-	
-	private CycleTimer timer = new CycleTimer(Transmuting.getExceptions());
 	
 	private Topic currentTopic;
 	
@@ -72,7 +63,7 @@ public class GuiBook extends GuiScreen {
 	
 	@Override
 	public void drawScreen(int par0, int par1, float par2) {
-		timer.incrementTime();
+		timer.tick();
 		
 		drawDefaultBackground();
 		
@@ -231,7 +222,7 @@ public class GuiBook extends GuiScreen {
 					
 					drawHoveringText(var3, par0, par1);
 				} else if(var2.checkHover(par0, par1)) {
-					var3.add(mc.gameSettings.keyBindUseItem.getDisplayName() + " " + Blocks.BOOKSHELF.getLocalizedName());
+					var3.add(TextFormatting.GOLD + "" + TextFormatting.ITALIC + mc.gameSettings.keyBindUseItem.getDisplayName() + TextFormatting.RESET + " " + Blocks.BOOKSHELF.getLocalizedName());
 					
 					drawHoveringText(var3, par0, par1);
 				}
@@ -288,19 +279,11 @@ public class GuiBook extends GuiScreen {
 			
 			@Override
 			public void drawPage(int par0, int par1, float par2) {
-				for(int var = 0; var < Smelting.getSmeltingList().size(); ++var) {
-					if(var < 10) {
-						drawSmeltingRecipe(var, 0, 10, Smelting.getSmeltingList().get(var));
-					}
-				}
-				
-				for(int var = 0; var < Smelting.getSmeltingList().size(); ++var) {
-					if(var < 10) {
-						writeSmeltingRecipe(var, 0, 10, Smelting.getSmeltingList().get(var), par0, par1, par2);
-					}
-				}
+				drawSmeltingPage(0, 10);
 				
 				mc.fontRenderer.drawString(smelting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				
+				describeSmeltingPage(par0, par1, 0, 10, par2);
 			}
 		};
 		
@@ -316,9 +299,11 @@ public class GuiBook extends GuiScreen {
 			
 			@Override
 			public void drawPage(int par0, int par1, float par2) {
-				createTransmutingPage(0, 10, par0, par1, par2);
+				drawTransmutingPage(0, 10);
 				
 				mc.fontRenderer.drawString(world_crafting.getDisplayName(), (width / 2) - 94, (height / 2) - 78, 0x1D1D1D);
+				
+				describeTransmutingPage(par0, par1, 0, 10, par2);
 			}
 		};
 		
@@ -326,9 +311,11 @@ public class GuiBook extends GuiScreen {
 			
 			@Override
 			public void drawPage(int par0, int par1, float par2) {
-				createTransmutingPage(10, 20, par0, par1, par2);
+				drawTransmutingPage(10, 20);
 				
 				mc.fontRenderer.drawString(world_crafting.getDisplayName(), (width / 2) - 94, (height / 2) - 78, 0x1D1D1D);
+				
+				describeTransmutingPage(par0, par1, 10, 20, par2);
 			}
 		};
 		
@@ -336,9 +323,11 @@ public class GuiBook extends GuiScreen {
 			
 			@Override
 			public void drawPage(int par0, int par1, float par2) {
-				createTransmutingPage(20, 30, par0, par1, par2);
+				drawTransmutingPage(20, 30);
 				
 				mc.fontRenderer.drawString(world_crafting.getDisplayName(), (width / 2) - 94, (height / 2) - 78, 0x1D1D1D);
+				
+				describeTransmutingPage(par0, par1, 20, 30, par2);
 			}
 		};
 		
@@ -359,276 +348,136 @@ public class GuiBook extends GuiScreen {
 		};
 	}
 	
-	private void createTransmutingPage(int min, int max, int par0, int par1, float par2) {
-		Map<Block, ObjectHolder> map = new HashMap<>();
-		List<ObjectHolder> list = new ArrayList<>();
-		
-		for(int var = 0; var < Transmuting.getTransmutingList().size(); ++var) {
-			Block var2 = fromTransList(var);
+	private void drawSmeltingPage(int par0, int par1) {
+		for(ItemStack[] var : Smelting.getList()) {
+			int index = Smelting.getList().indexOf(var);
 			
-			if(var2 == Blocks.LOG || var2 == Blocks.LOG2) {
+			if(index >= par0 && index < par1) {
+				int perc = index % 10;
+				int var2 = (perc < 5) ? perc : (perc - 5);
+				int var3 = (perc < 5) ? 0 : 120;
 				
-			} else {
-				map.put(var2, Transmuting.getTransmutingList().get(var));
+				mc.renderEngine.bindTexture(texture);
+				
+				drawTexturedModalRect((width / 2) - 100 + var3, (height / 2) - 55 + (var2 * 24) - var3, 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) - 40 + var3, (height / 2) - 55 + (var2 * 24) - var3, 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) - 70 + var3, (height / 2) - 55 + (var2 * 24) - var3, 37, 220, 21, 20);
+				
+				mc.getRenderItem().renderItemAndEffectIntoGUI(var[0], (width / 2) - 98 + var3, (height / 2) - 53 + (var2 * 24) - var3);
+				mc.getRenderItem().renderItemAndEffectIntoGUI(var[1], (width / 2) - 38 + var3, (height / 2) - 53 + (var2 * 24) - var3);
 			}
 		}
-		
-		for(Block var : map.keySet()) {
-			list.add(map.get(var));
+	}
+	
+	private void drawTransmutingPage(int par0, int par1) {
+		for(List<Component[]> var : Transmuting.getList()) {
+			int index = Transmuting.getList().indexOf(var);
+			
+			if(index >= par0 && index < par1) {
+				Component[] component = timer.getCycledComponents(var);
+				ItemStack var0 = component[0].getDisplayStack();
+				ItemStack var1 = component[1].getDisplayStack();
+				
+				int perc = index % 10;
+				int var2 = (perc < 5) ? perc : (perc - 5);
+				int var3 = (perc < 5) ? 0 : 120;
+				
+				mc.renderEngine.bindTexture(texture);
+				
+				drawTexturedModalRect((width / 2) - 100 + var3, (height / 2) - 55 + (var2 * 24), 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) - 40 + var3, (height / 2) - 55 + (var2 * 24), 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) - 70 + var3, (height / 2) - 55 + (var2 * 24), 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) - 77 + var3, (height / 2) - 49 + (var2 * 24), 53, 243, 5, 9);
+				drawTexturedModalRect((width / 2) - 47 + var3, (height / 2) - 49 + (var2 * 24), 53, 243, 5, 9);
+				
+				mc.getRenderItem().renderItemAndEffectIntoGUI(new ItemStack(ItemUnit.MELTY_FLINT), (width / 2) - 98 + var3, (height / 2) - 53 + (var2 * 24));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(var1, (width / 2) - 38 + var3, (height / 2) - 53 + (var2 * 24));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(var0, (width / 2) - 68 + var3, (height / 2) - 53 + (var2 * 24));
+			}
 		}
-		
-		list.add(new ObjectHolder(Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND), Blocks.SOUL_SAND.getDefaultState()));
-		list.add(new ObjectHolder(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK), Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK)));
-		
-		int var0 = 0, var1 = 0;
-		
-		for(int var = 0; var < list.size(); var++) {
-			Block var2 = ((IBlockState)list.get(var).getObject(0)).getBlock();
+	}
+	
+	/**
+	 * 
+	 * @param par0 mouseX
+	 * @param par1 mouseY
+	 * @param par2 min
+	 * @param par3 max
+	 * @param par4 partial ticks
+	 */
+	private void describeSmeltingPage(int par0, int par1, int par2, int par3, float par4) {
+		for(ItemStack[] var : Smelting.getList()) {
+			int index = Smelting.getList().indexOf(var);
 			
-			int var3 = (var0 < 5) ? var0 : (var0 - 5);
-			int var4 = (var0 < 5) ? 0 : 120;
-			
-			ObjectHolder var5 = list.get(var);
-			
-			if(var >= min && var < max) {
-				if(Transmuting.getExceptions().contains(var2)) {
-					drawComplexTransmutingRecipe(var3, var4, var2);
-				} else {
-					drawTransmutingRecipe(var3, var4, var5);
+			if(index >= par2 && index < par3) {
+				int perc = index % 10;
+				int var2 = (perc < 5) ? perc : (perc - 5);
+				int var3 = (perc < 5) ? 0 : 120;
+				
+				HoverChecker var4 = new HoverChecker((height / 2) - 53 + (var2 * 24), (height / 2) - 53 + 16 + (var2 * 24), (width / 2) - 98 + var3, (width / 2) - 98 + 16 + var3, 0);
+				HoverChecker var5 = new HoverChecker((height / 2) - 53 + (var2 * 24), (height / 2) - 53 + 16 + (var2 * 24), (width / 2) - 38 + var3, (width / 2) - 38 + 16 + var3, 0);
+				HoverChecker var6 = new HoverChecker((height / 2) - 53 + (var2 * 24), (height / 2) - 53 + 16 + (var2 * 24), (width / 2) - 68 + var3, (width / 2) - 68 + 16 + var3, 0);
+				
+				List<String> var7 = new ArrayList<String>();
+				
+				if(var4.checkHover(par0, par1)) {
+					var7.add(var[0].getDisplayName());
+					
+					drawHoveringText(var7, par0, par1);
+				} else if(var5.checkHover(par0, par1)) {
+					var7.add(var[1].getDisplayName());
+					
+					drawHoveringText(var7, par0, par1);
+				} else if(var6.checkHover(par0, par1)) {
+					var7.add(I18n.format(LangKeys.ACTION + LangKeys.SMELT));
+					
+					drawHoveringText(var7, par0, par1);
 				}
-				
-				var0++;
 			}
 		}
-		
-		for(int var = 0; var < list.size(); var++) {
-			Block var2 = ((IBlockState)list.get(var).getObject(0)).getBlock();
+	}
+	
+	/**
+	 * 
+	 * @param par0 mouseX
+	 * @param par1 mouseY
+	 * @param par2 min
+	 * @param par3 max
+	 * @param par4 partial ticks
+	 */
+	private void describeTransmutingPage(int par0, int par1, int par2, int par3, float par4) {
+		for(List<Component[]> var : Transmuting.getList()) {
+			int index = Transmuting.getList().indexOf(var);
 			
-			int var3 = (var1 < 5) ? var1 : (var1 - 5);
-			int var4 = (var1 < 5) ? 0 : 120;
-			
-			ObjectHolder var5 = list.get(var);
-			
-			if(var >= min && var < max) {
-				if(Transmuting.getExceptions().contains(var2)) {
-					writeComplexTransmutingRecipe(var3, var4, var2, par0, par1, par2);
-				} else {
-					writeTransmutingRecipe(var3, var4, var5, par0, par1, par2);
+			if(index >= par2 && index < par3) {
+				Component[] component = timer.getCycledComponents(var);
+				ItemStack var0 = component[0].getDisplayStack();
+				ItemStack var1 = component[1].getDisplayStack();
+				
+				int perc = index % 10;
+				int var2 = (perc < 5) ? perc : (perc - 5);
+				int var3 = (perc < 5) ? 0 : 120;
+				
+				HoverChecker var4 = new HoverChecker((height / 2) - 53 + (var2 * 24), (height / 2) - 53 + 16 + (var2 * 24), (width / 2) - 98 + var3, (width / 2) - 98 + 16 + var3, 0);
+				HoverChecker var5 = new HoverChecker((height / 2) - 53 + (var2 * 24), (height / 2) - 53 + 16 + (var2 * 24), (width / 2) - 38 + var3, (width / 2) - 38 + 16 + var3, 0);
+				HoverChecker var6 = new HoverChecker((height / 2) - 53 + (var2 * 24), (height / 2) - 53 + 16 + (var2 * 24), (width / 2) - 68 + var3, (width / 2) - 68 + 16 + var3, 0);
+				
+				List<String> var7 = new ArrayList<String>();
+				
+				if(var4.checkHover(par0, par1)) {
+					var7.add(ItemUnit.MELTY_FLINT.getItemStackDisplayName(new ItemStack(ItemUnit.MELTY_FLINT)));
+					
+					drawHoveringText(var7, par0, par1);
+				} else if(var5.checkHover(par0, par1)) {
+					var7.add(var1.getDisplayName());
+					
+					drawHoveringText(var7, par0, par1);
+				} else if(var6.checkHover(par0, par1)) {
+					var7.add(TextFormatting.GOLD + "" + TextFormatting.ITALIC + mc.gameSettings.keyBindUseItem.getDisplayName() + TextFormatting.RESET + " " + var0.getDisplayName());
+					
+					drawHoveringText(var7, par0, par1);
 				}
-				
-				var1++;
 			}
 		}
-	}
-	
-	private Block fromTransList(int par0) {
-		return ((IBlockState)Transmuting.getTransmutingList().get(par0).getObject(0)).getBlock();
-	}
-	
-	/**
-	 * 
-	 * @param par0 iterator
-	 * @param par1 min 
-	 * @param par2 max
-	 * @param par3 obj
-	 */
-	private void drawSmeltingRecipe(int par0, int par1, int par2, ObjectHolder par3) {
-		int var0 = par0 < ((par1 + par2) / 2) ? 0 : 120;
-		int var1 = (par0 % 10);
-		
-		mc.renderEngine.bindTexture(texture);
-		
-		drawTexturedModalRect((width / 2) - 100 + var0, (height / 2) - 55 + (var1 * 24) - var0, 38, 200, 20, 20);
-		drawTexturedModalRect((width / 2) - 40 + var0, (height / 2) - 55 + (var1 * 24) - var0, 38, 200, 20, 20);
-		drawTexturedModalRect((width / 2) - 70 + var0, (height / 2) - 55 + (var1 * 24) - var0, 37, 220, 21, 20);
-		
-		mc.getRenderItem().renderItemAndEffectIntoGUI((ItemStack)par3.getObject(0), (width / 2) - 98 + var0, (height / 2) - 53 + (var1 * 24) - var0);
-		mc.getRenderItem().renderItemAndEffectIntoGUI((ItemStack)par3.getObject(1), (width / 2) - 38 + var0, (height / 2) - 53 + (var1 * 24) - var0);
-	}
-	
-	private void writeSmeltingRecipe(int par0, int par1, int par2, ObjectHolder par3, int par4, int par5, float par6) {
-		int var0 = par0 < ((par1 + par2) / 2) ? 0 : 120;
-		int var1 = (par0 % 10);
-		
-		HoverChecker var2 = new HoverChecker((height / 2) - 53 + (var1 * 24) - var0, (height / 2) - 53 + 16 + (var1 * 24) - var0, (width / 2) - 98 + var0, (width / 2) - 98 + 16 + var0, 0);
-		HoverChecker var3 = new HoverChecker((height / 2) - 53 + (var1 * 24) - var0, (height / 2) - 53 + 16 + (var1 * 24) - var0, (width / 2) - 38 + var0, (width / 2) - 38 + 16 + var0, 0);
-		HoverChecker var4 = new HoverChecker((height / 2) - 53 + (var1 * 24) - var0, (height / 2) - 53 + 16 + (var1 * 24) - var0, (width / 2) - 68 + var0, (width / 2) - 68 + 16 + var0, 0);
-		List<String> var5 = new ArrayList<String>();
-		
-		if(var2.checkHover(par4, par5)) {
-			var5.add(ItemUnit.MELTY_FLINT.getItemStackDisplayName((ItemStack)par3.getObject(0)));
-			
-			drawHoveringText(var5, par4, par5);
-		} else if(var3.checkHover(par4, par5)) {
-			var5.add(ItemUnit.MELTY_FLINT.getItemStackDisplayName((ItemStack)par3.getObject(1)));
-			
-			drawHoveringText(var5, par4, par5);
-		} else if(var4.checkHover(par4, par5)) {
-			var5.add(I18n.format(LangKeys.ACTION + LangKeys.SMELT));
-			
-			drawHoveringText(var5, par4, par5);
-		}
-	}
-	
-	/**
-	 * 
-	 * @param par0 iterator
-	 * @param par1 min 
-	 * @param par2 max
-	 * @param par3 obj
-	 */
-	private void drawTransmutingRecipe(int var3, int var4, ObjectHolder var5) {
-		mc.renderEngine.bindTexture(texture);
-		
-		drawTexturedModalRect((width / 2) - 100 + var4, (height / 2) - 55 + (var3 * 24), 38, 200, 20, 20);
-		drawTexturedModalRect((width / 2) - 40 + var4, (height / 2) - 55 + (var3 * 24), 38, 200, 20, 20);
-		drawTexturedModalRect((width / 2) - 70 + var4, (height / 2) - 55 + (var3 * 24), 38, 200, 20, 20);
-		drawTexturedModalRect((width / 2) - 77 + var4, (height / 2) - 49 + (var3 * 24), 53, 243, 5, 9);
-		drawTexturedModalRect((width / 2) - 47 + var4, (height / 2) - 49 + (var3 * 24), 53, 243, 5, 9);
-		
-		mc.getRenderItem().renderItemAndEffectIntoGUI(new ItemStack(ItemUnit.MELTY_FLINT), (width / 2) - 98 + var4, (height / 2) - 53 + (var3 * 24));
-		
-		if(var5.getObject(1) instanceof IBlockState) {
-			mc.getRenderItem().renderItemAndEffectIntoGUI(getOutputDisplayBlock(((IBlockState)var5.getObject(0)).getBlock(), ((IBlockState)var5.getObject(1)).getBlock()), (width / 2) - 38 + var4, (height / 2) - 53 + (var3 * 24));
-			mc.getRenderItem().renderItemAndEffectIntoGUI(getInputDisplayBlock(((IBlockState)var5.getObject(0)).getBlock(), ((IBlockState)var5.getObject(1)).getBlock()), (width / 2) - 68 + var4, (height / 2) - 53 + (var3 * 24));
-		} else if(var5.getObject(1) instanceof Item) {
-			mc.getRenderItem().renderItemAndEffectIntoGUI(getDisplayItem(((IBlockState)var5.getObject(0)).getBlock(), (Item)var5.getObject(1)), (width / 2) - 38 + var4, (height / 2) - 53 + (var3 * 24));
-			mc.getRenderItem().renderItemAndEffectIntoGUI(getInputDisplayBlock(((IBlockState)var5.getObject(0)).getBlock(), (Item)var5.getObject(1)), (width / 2) - 68 + var4, (height / 2) - 53 + (var3 * 24));
-		}
-	}
-	
-	/**
-	 * 
-	 * @param par1 posx 
-	 * @param par2 posy
-	 * @param par3 obj
-	 */
-	private void drawComplexTransmutingRecipe(int var3, int var4, Block var2) {
-		mc.renderEngine.bindTexture(texture);
-		
-		drawTexturedModalRect((width / 2) - 100 + var4, (height / 2) - 55 + (var3 * 24), 38, 200, 20, 20);
-		drawTexturedModalRect((width / 2) - 40 + var4, (height / 2) - 55 + (var3 * 24), 38, 200, 20, 20);
-		drawTexturedModalRect((width / 2) - 70 + var4, (height / 2) - 55 + (var3 * 24), 38, 200, 20, 20);
-		drawTexturedModalRect((width / 2) - 77 + var4, (height / 2) - 49 + (var3 * 24), 53, 243, 5, 9);
-		drawTexturedModalRect((width / 2) - 47 + var4, (height / 2) - 49 + (var3 * 24), 53, 243, 5, 9);
-		
-		mc.getRenderItem().renderItemAndEffectIntoGUI(new ItemStack(ItemUnit.MELTY_FLINT), (width / 2) - 98 + var4, (height / 2) - 53 + (var3 * 24));
-		
-		mc.getRenderItem().renderItemAndEffectIntoGUI(timer.getStack(var2, 0), (width / 2) - 68 + var4, (height / 2) - 53 + (var3 * 24));
-		mc.getRenderItem().renderItemAndEffectIntoGUI(timer.getStack(var2, 1), (width / 2) - 38 + var4, (height / 2) - 53 + (var3 * 24));
-	}
-	
-	private void writeComplexTransmutingRecipe(int var3, int var4, Block var2, int par0, int par1, float par6) {
-		HoverChecker var2X = new HoverChecker((height / 2) - 53 + (var3 * 24), (height / 2) - 53 + 16 + (var3 * 24), (width / 2) - 98 + var4, (width / 2) - 98 + 16 + var4, 0);
-		HoverChecker var3X = new HoverChecker((height / 2) - 53 + (var3 * 24), (height / 2) - 53 + 16 + (var3 * 24), (width / 2) - 38 + var4, (width / 2) - 38 + 16 + var4, 0);
-		HoverChecker var4X = new HoverChecker((height / 2) - 53 + (var3 * 24), (height / 2) - 53 + 16 + (var3 * 24), (width / 2) - 68 + var4, (width / 2) - 68 + 16 + var4, 0);
-		List<String> var5X = new ArrayList<String>();
-		
-		if(var2X.checkHover(par0, par1)) {
-			var5X.add(ItemUnit.MELTY_FLINT.getItemStackDisplayName(new ItemStack(ItemUnit.MELTY_FLINT)));
-			
-			drawHoveringText(var5X, par0, par1);
-		} else if(var3X.checkHover(par0, par1)) {
-			var5X.add(timer.getStack(var2, 1).getDisplayName());
-			
-			drawHoveringText(var5X, par0, par1);
-		} else if(var4X.checkHover(par0, par1)) {
-			var5X.add(TextFormatting.GOLD + "" + TextFormatting.ITALIC + mc.gameSettings.keyBindUseItem.getDisplayName() + TextFormatting.RESET + " " + timer.getStack(var2, 0).getDisplayName());
-			
-			drawHoveringText(var5X, par0, par1);
-		}
-	}
-	
-	private void writeTransmutingRecipe(int var3, int var4, ObjectHolder var5, int par0, int par1, float par6) {
-		HoverChecker var2X = new HoverChecker((height / 2) - 53 + (var3 * 24), (height / 2) - 53 + 16 + (var3 * 24), (width / 2) - 98 + var4, (width / 2) - 98 + 16 + var4, 0);
-		HoverChecker var3X = new HoverChecker((height / 2) - 53 + (var3 * 24), (height / 2) - 53 + 16 + (var3 * 24), (width / 2) - 38 + var4, (width / 2) - 38 + 16 + var4, 0);
-		HoverChecker var4X = new HoverChecker((height / 2) - 53 + (var3 * 24), (height / 2) - 53 + 16 + (var3 * 24), (width / 2) - 68 + var4, (width / 2) - 68 + 16 + var4, 0);
-		List<String> var5X = new ArrayList<String>();
-		
-		if(var2X.checkHover(par0, par1)) {
-			var5X.add(ItemUnit.MELTY_FLINT.getItemStackDisplayName(new ItemStack(ItemUnit.MELTY_FLINT)));
-			
-			drawHoveringText(var5X, par0, par1);
-		} else if(var3X.checkHover(par0, par1)) {
-			if(var5.getObject(1) instanceof IBlockState) {
-				var5X.add(getOutputDisplayBlock(((IBlockState)var5.getObject(0)).getBlock(), ((IBlockState)var5.getObject(1)).getBlock()).getDisplayName());
-			} else if(var5.getObject(1) instanceof Item) {
-				var5X.add(getDisplayItem(((IBlockState)var5.getObject(0)).getBlock(), (Item)var5.getObject(1)).getDisplayName());
-			}
-			
-			drawHoveringText(var5X, par0, par1);
-		} else if(var4X.checkHover(par0, par1)) {
-			if(var5.getObject(1) instanceof IBlockState) {
-				var5X.add(TextFormatting.GOLD + "" + TextFormatting.ITALIC + mc.gameSettings.keyBindUseItem.getDisplayName() + TextFormatting.RESET + " " + getInputDisplayBlock(((IBlockState)var5.getObject(0)).getBlock(), ((IBlockState)var5.getObject(1)).getBlock()).getDisplayName());
-			} else if(var5.getObject(1) instanceof Item) {
-				var5X.add(TextFormatting.GOLD + "" + TextFormatting.ITALIC + mc.gameSettings.keyBindUseItem.getDisplayName() + TextFormatting.RESET + " " + getInputDisplayBlock(((IBlockState)var5.getObject(0)).getBlock(), (Item)var5.getObject(1)).getDisplayName());
-			}
-			
-			drawHoveringText(var5X, par0, par1);
-		}
-	}
-	
-	/**
-	 * 
-	 * @param par0 input
-	 * @param par1 output
-	 * @return
-	 */
-	private ItemStack getDisplayItem(Block par0, Item par1) {
-		ItemStack var0 = new ItemStack(par1);
-		
-		/** Manual Exceptions */
-		
-		return var0;
-	}
-	
-	/**
-	 * 
-	 * @param par0 input
-	 * @param par1 output
-	 * @return
-	 */
-	private ItemStack getInputDisplayBlock(Block par0, Block par1) {
-		ItemStack var0 = new ItemStack(par0);
-		
-		/** Manual Exceptions */
-		if(par0 == Blocks.SAND && par1 == Blocks.SOUL_SAND) {
-			var0 = new ItemStack(Blocks.SAND, 1, 1);
-		}
-		
-		return var0;
-	}
-	
-	/**
-	 * 
-	 * @param par0 input
-	 * @param par1 output
-	 * @return
-	 */
-	private ItemStack getInputDisplayBlock(Block par0, Item par1) {
-		ItemStack var0 = new ItemStack(par0);
-		
-		return var0;
-	}
-	
-	/**
-	 * 
-	 * @param par0 input
-	 * @param par1 output
-	 * @return
-	 */
-	private ItemStack getOutputDisplayBlock(Block par0, Block par1) {
-		ItemStack var0 = new ItemStack(par1);
-		
-		/** Manual Exceptions */
-		if(par0 == Blocks.NETHERRACK && par1 == Blocks.SAND) {
-			var0 = new ItemStack(Blocks.SAND, 1, 1);
-		} else if(par0 == Blocks.ICE && par1 == Blocks.FLOWING_WATER) {
-			var0 = new ItemStack(Items.WATER_BUCKET);
-		} else if(par0 == Blocks.OBSIDIAN && par1 == Blocks.FLOWING_LAVA) {
-			var0 = new ItemStack(Items.LAVA_BUCKET);
-		}
-		
-		return var0;
 	}
 }

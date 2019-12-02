@@ -1,5 +1,6 @@
 package clevernucleus.adiectamateria.client;
 
+import clevernucleus.adiectamateria.client.gui.GuiBook;
 import clevernucleus.adiectamateria.common.Common;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -14,6 +15,6 @@ public class Client extends Common {
 	
 	@Override
 	public void displayBook(EntityPlayer par0) {
-		//FMLClientHandler.instance().displayGuiScreen(par0, new GuiBook());
+		FMLClientHandler.instance().displayGuiScreen(par0, new GuiBook());
 	}
 }

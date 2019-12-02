@@ -1,68 +1,48 @@
 package clevernucleus.adiectamateria.common.util.recipes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import clevernucleus.adiectamateria.common.util.ObjectHolder;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import clevernucleus.adiectamateria.common.util.Component;
 
 public class Transmuting {
-	private static final List<ObjectHolder> LIST = new ArrayList<>();
-	private static final Map<IBlockState, Object> MAP = new HashMap<>();
-	private static final List<Block> EXCEPTIONS = new ArrayList<Block>();
-	private static final Map<Block, List<ItemStack>> EXCEPTION_MAP = new HashMap<>();
+	private static final List<Component[]> TRANSMUTATION_ARRAY = new ArrayList<Component[]>();
+	private static final List<List<Component[]>> TRANSMUTATION_LIST = new ArrayList<List<Component[]>>();
 	
-	public Transmuting() {}
-	
-	public static void addSimpleRecipe(Block par0, Block par1) {
-		LIST.add(new ObjectHolder(par0.getDefaultState(), par1.getDefaultState()));
-		MAP.put(par0.getDefaultState(), par1.getDefaultState());
-	}
-	
-	public static void addSimpleRecipe(Block par0, Item par1) {
-		LIST.add(new ObjectHolder(par0.getDefaultState(), par1));
-		MAP.put(par0.getDefaultState(), par1);
-	}
-	
-	public static void addComplexRecipe(IBlockState par0, IBlockState par1) {
-		LIST.add(new ObjectHolder(par0, par1));
-		MAP.put(par0, par1);
-	}
-	
-	public static List<ObjectHolder> getTransmutingList() {
-		return LIST;
-	}
-	
-	public static Map<IBlockState, Object> getTransmutingMap() {
-		return MAP;
-	}
-	
-	public static void addBlockException(Block par0, int par1) {
-		EXCEPTIONS.add(par0);
+	/**
+	 * 
+	 * @param par0 Recipe id; used to group looping recipes into one section on the book; index starts at 0
+	 * @param par1 Input component; should only be a block
+	 * @param par2 Output component; what the block turns into
+	 */
+	public static void addRecipe(int par0, Component par1, Component par2) {
+		Component[] var0 = new Component[2];
 		
-		List<ItemStack> var0 = new ArrayList<ItemStack>();
+		var0[0] = par1;
+		var0[1] = par2;
 		
-		if(par1 > 0) {
-			for(int var = 0; var < par1; var++) {
-				var0.add(new ItemStack(par0, 1, var));
-			}
+		List<Component[]> var2 = new ArrayList<Component[]>();
+		
+		if(TRANSMUTATION_LIST.size() >= (par0 + 1)) {
+			var2 = TRANSMUTATION_LIST.get(par0);
+			
+			var2.add(var0);
+			
+			TRANSMUTATION_LIST.set(par0, var2);
 		} else {
-			var0.add(new ItemStack(par0, 1, 1));
+			var2.add(var0);
+			
+			TRANSMUTATION_LIST.add(par0, var2);
 		}
 		
-		EXCEPTION_MAP.put(par0, var0);
+		TRANSMUTATION_ARRAY.add(var0);
 	}
 	
-	public static List<Block> getExceptions() {
-		return EXCEPTIONS;
+	public static List<Component[]> getArray() {
+		return TRANSMUTATION_ARRAY;
 	}
 	
-	public static Map<Block, List<ItemStack>> getExceptionMap() {
-		return EXCEPTION_MAP;
+	public static List<List<Component[]>> getList() {
+		return TRANSMUTATION_LIST;
 	}
 }
