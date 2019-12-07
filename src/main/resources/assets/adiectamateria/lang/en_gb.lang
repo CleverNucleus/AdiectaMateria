@@ -1,4 +1,4 @@
-item.book.name=Ex Materiae Vicipaedia
+item.book_help.name=Ex Materiae Vicipaedia
 item.melty_flint.name=Melty Flint
 item.rice_paper.name=Rice Paper
 item.rice_cooked.name=Cooked Rice
@@ -16,7 +16,7 @@ tile.rice_block.name=Paper Woven Straw
 
 itemGroup.adiectamateria=Adiecta Materia
 
-itemSubText.book=Material Science
+itemSubText.book_help=Material Science
 itemSubText.melty_flint=Fusilia Petram
 itemSubText.infinite_lava=Alchimia genere artificii
 itemSubText.infinite_water=Alchimia genere artificii
@@ -24,6 +24,9 @@ itemSubText.onigiri=Hearty
 
 gui.action.smelting=Smelting
 gui.action.crafting=Crafting
+gui.action.shaped=Shaped Crafting
+gui.action.shapeless=Shapeless Crafting
+gui.action.modded=Custom Crafting
 
 gui.topic.introduction=Introduction
 gui.topic.melty_flint=Melty Flint

@@ -19,4 +19,10 @@ public class CycleTimer {
 		
 		return par0.get((int)(second % par0.size()));
 	}
+	
+	public Recipe getCycledRecipe(List<Recipe> par0) {
+		long second = (long)((double)(end - start) * 0.001D);
+		
+		return par0.get((int)(second % par0.size()));
+	}
 }

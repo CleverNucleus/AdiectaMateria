@@ -21,6 +21,12 @@ public class Recipes {
 		Smelting.addRecipe(new ItemStack(Items.FLINT), new ItemStack(ItemUnit.MELTY_FLINT));
 		
 		/** Crafting */
+		Crafting.addShapelessRecipe(0, new ItemStack(Items.FLINT, 1), new ItemStack(ItemUnit.MELTY_FLINT));
+		Crafting.addShapelessRecipe(0, new ItemStack(Items.FLINT, 2), new ItemStack(ItemUnit.MELTY_FLINT), new ItemStack(Blocks.GRAVEL));
+		
+		Crafting.addShapedRecipe(1, "A", "B", "A", new ItemStack(Items.APPLE, 2), new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BOOK));
+		Crafting.addShapelessRecipe(2, new ItemStack(Items.DYE, 12, 1), new ItemStack(ItemUnit.MELTY_FLINT), new ItemStack(Items.DYE, 1, 1));
+		Crafting.addShapelessRecipe(3, new ItemStack(Items.DYE, 12, 4), new ItemStack(ItemUnit.MELTY_FLINT), new ItemStack(Items.DYE, 1, 4));
 		
 		/** Transmuting */
 		

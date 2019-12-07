@@ -10,7 +10,9 @@ import clevernucleus.adiectamateria.client.content.Topic;
 import clevernucleus.adiectamateria.common.item.ItemUnit;
 import clevernucleus.adiectamateria.common.util.Component;
 import clevernucleus.adiectamateria.common.util.CycleTimer;
+import clevernucleus.adiectamateria.common.util.Recipe;
 import clevernucleus.adiectamateria.common.util.interfaces.IConstants;
+import clevernucleus.adiectamateria.common.util.recipes.Crafting;
 import clevernucleus.adiectamateria.common.util.recipes.Smelting;
 import clevernucleus.adiectamateria.common.util.recipes.Transmuting;
 import net.minecraft.client.gui.GuiButton;
@@ -291,7 +293,11 @@ public class GuiBook extends GuiScreen {
 			
 			@Override
 			public void drawPage(int par0, int par1, float par2) {
+				drawCraftingPage(0, 10);
+				
 				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				
+				describeCraftingPage(par0, par1, 0, 10, par2);
 			}
 		};
 		
@@ -397,6 +403,39 @@ public class GuiBook extends GuiScreen {
 		}
 	}
 	
+	private void drawCraftingPage(int par0, int par1) {
+		for(List<Recipe> var : Crafting.getList()) {
+			int index = Crafting.getList().indexOf(var);
+			
+			if(index >= par0 && index < par1) {
+				Recipe recipe = timer.getCycledRecipe(var);
+				
+				int perc = index % 4;
+				int var2 = (perc < 2) ? perc : (perc - 2);
+				int var3 = (perc < 2) ? 0 : 120;
+				
+				mc.renderEngine.bindTexture(texture);
+				
+				drawTexturedModalRect((width / 2) - 105 + var3, (height / 2) - 55 + (var2 * 64), 58, 200, 52, 52);
+				drawTexturedModalRect((width / 2) - 35 + var3, (height / 2) - 39 + (var2 * 64), 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) - 47 + var3, (height / 2) - 36 + (var2 * 64), 50, 240, 8, 15);
+				
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[0], (width / 2) - 33 + var3, (height / 2) - 37 + (var2 * 64));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[1], (width / 2) - 104 + var3, (height / 2) - 54 + (var2 * 64));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[2], (width / 2) - 87 + var3, (height / 2) - 54 + (var2 * 64));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[3], (width / 2) - 70 + var3, (height / 2) - 54 + (var2 * 64));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[4], (width / 2) - 104 + var3, (height / 2) - 37 + (var2 * 64));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[5], (width / 2) - 87 + var3, (height / 2) - 37 + (var2 * 64));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[6], (width / 2) - 70 + var3, (height / 2) - 37 + (var2 * 64));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[7], (width / 2) - 104 + var3, (height / 2) - 20 + (var2 * 64));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[8], (width / 2) - 87 + var3, (height / 2) - 20 + (var2 * 64));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[9], (width / 2) - 70 + var3, (height / 2) - 20 + (var2 * 64));
+				
+				mc.getRenderItem().renderItemOverlayIntoGUI(fontRenderer, recipe.getDisplayRecipe()[0], (width / 2) - 33 + var3, (height / 2) - 37 + (var2 * 64), recipe.getDisplayRecipe()[0].getCount() + "");
+			}
+		}
+	}
+	
 	/**
 	 * 
 	 * @param par0 mouseX
@@ -476,6 +515,109 @@ public class GuiBook extends GuiScreen {
 					var7.add(TextFormatting.GOLD + "" + TextFormatting.ITALIC + mc.gameSettings.keyBindUseItem.getDisplayName() + TextFormatting.RESET + " " + var0.getDisplayName());
 					
 					drawHoveringText(var7, par0, par1);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param par0 mouseX
+	 * @param par1 mouseY
+	 * @param par2 min
+	 * @param par3 max
+	 * @param par4 partial ticks
+	 */
+	private void describeCraftingPage(int par0, int par1, int par2, int par3, float par4) {
+		for(List<Recipe> var : Crafting.getList()) {
+			int index = Crafting.getList().indexOf(var);
+			
+			if(index >= par2 && index < par3) {
+				Recipe recipe = timer.getCycledRecipe(var);
+				
+				int perc = index % 4;
+				int var2 = (perc < 2) ? perc : (perc - 2);
+				int var3 = (perc < 2) ? 0 : 120;
+				
+				HoverChecker var4 = new HoverChecker((height / 2) - 37 + (var2 * 64), (height / 2) - 21 + (var2 * 64), (width / 2) - 33 + var3, (width / 2) - 17 + var3, 0);
+				HoverChecker var5 = new HoverChecker((height / 2) - 54 + (var2 * 64), (height / 2) - 38 + (var2 * 64), (width / 2) - 104 + var3, (width / 2) - 88 + var3, 0);
+				HoverChecker var6 = new HoverChecker((height / 2) - 54 + (var2 * 64), (height / 2) - 38 + (var2 * 64), (width / 2) - 87 + var3, (width / 2) - 71 + var3, 0);
+				HoverChecker var7 = new HoverChecker((height / 2) - 54 + (var2 * 64), (height / 2) - 38 + (var2 * 64), (width / 2) - 70 + var3, (width / 2) - 54 + var3, 0);
+				HoverChecker var8 = new HoverChecker((height / 2) - 37 + (var2 * 64), (height / 2) - 21 + (var2 * 64), (width / 2) - 104 + var3, (width / 2) - 88 + var3, 0);
+				HoverChecker var9 = new HoverChecker((height / 2) - 37 + (var2 * 64), (height / 2) - 21 + (var2 * 64), (width / 2) - 87 + var3, (width / 2) - 71 + var3, 0);
+				HoverChecker var10 = new HoverChecker((height / 2) - 37 + (var2 * 64), (height / 2) - 21 + (var2 * 64), (width / 2) - 70 + var3, (width / 2) - 54 + var3, 0);
+				HoverChecker var11 = new HoverChecker((height / 2) - 20 + (var2 * 64), (height / 2) - 4 + (var2 * 64), (width / 2) - 104 + var3, (width / 2) - 88 + var3, 0);
+				HoverChecker var12 = new HoverChecker((height / 2) - 20 + (var2 * 64), (height / 2) - 4 + (var2 * 64), (width / 2) - 87 + var3, (width / 2) - 71 + var3, 0);
+				HoverChecker var13 = new HoverChecker((height / 2) - 20 + (var2 * 64), (height / 2) - 4 + (var2 * 64), (width / 2) - 70 + var3, (width / 2) - 54 + var3, 0);
+				HoverChecker var15 = new HoverChecker((height / 2) - 36 + (var2 * 64), (height / 2) - 21 + (var2 * 64), (width / 2) - 47 + var3, (width / 2) - 39 + var3, 0);
+				
+				
+				List<String> var14 = new ArrayList<String>();
+				
+				if(var4.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[0] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[0].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var5.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[1] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[1].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var6.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[2] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[2].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var7.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[3] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[3].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var8.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[4] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[4].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var9.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[5] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[5].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var10.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[6] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[6].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var11.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[7] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[7].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var12.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[8] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[8].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var13.checkHover(par0, par1)) {
+					if(recipe.getDisplayRecipe()[9] != ItemStack.EMPTY) {
+						var14.add(recipe.getDisplayRecipe()[9].getDisplayName());
+					}
+					
+					drawHoveringText(var14, par0, par1);
+				} else if(var15.checkHover(par0, par1)) {
+					var14.add(I18n.format(LangKeys.ACTION + recipe.getRecipeType().getKey()));
+					
+					drawHoveringText(var14, par0, par1);
 				}
 			}
 		}
