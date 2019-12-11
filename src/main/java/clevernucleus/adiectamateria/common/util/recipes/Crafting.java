@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import clevernucleus.adiectamateria.common.util.Recipe;
 import clevernucleus.adiectamateria.common.util.interfaces.IConstants;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -77,49 +78,42 @@ public class Crafting {
 		if(par4.length > 1) {
 			String var0 = IConstants.MODID + ":" + par4[0].getUnlocalizedName().substring(5) + "_" + par0;
 			String var1 = IConstants.MODID + ":shaped";
-			Set<Character> var2 = new TreeSet<>();
-			List<String> var3 = new ArrayList<String>();
+			
+			List<String> var2 = new ArrayList<String>();
+			Set<Character> var3 = new TreeSet<>();
 			
 			if(!par1.isEmpty()) {
-				var3.add(par1);
+				var2.add(par1);
 			}
 			
 			if(!par2.isEmpty()) {
-				var3.add(par2);
+				var2.add(par2);
 			}
 			
 			if(!par3.isEmpty()) {
-				var3.add(par3);
+				var2.add(par3);
 			}
 			
-			String[] var4 = new String[var3.size()];
-			String var5 = par1 + par2 + par3;
+			String var4 = par1 + par2 + par3;
 			
-			for(int var = 0; var < var5.length(); var++) {
-				if(var5.charAt(var) != ' ') {
-					var2.add(var5.charAt(var));
+			for(int var = 0; var < var4.length(); var++) {
+				if(var4.charAt(var) != ' ') {
+					var3.add(var4.charAt(var));
 				}
 			}
 			
-			Object[] var6 = new Object[var3.size() + (2 * var2.size())];
+			Object[] var5 = new Object[var2.size() + (2 * var3.size())];
 			
-			int var7 = var3.size(), var8 = var3.size();
-			
-			for(int var = 0; var < (var3.size() + (2 * var2.size())); var++) {
-				if(var < var3.size()) {
-					var6[var] = var3.get(var);
+			for(int var = 0; var < (var2.size() + var3.size()); var++) {
+				if(var < var2.size()) {
+					var5[var] = var2.get(var);
 				} else {
-					var6[var] = (var % 2 == 0 ? par4[var - var8] : var2.toArray()[var - var7]);
-					
-					if(var % 2 == 0) {
-						var8++;
-					} else {
-						var7++;
-					}
+					var5[var2.size() + (2 * (var - var2.size()))] = var3.toArray()[(var - var2.size())];
+					var5[var2.size() + (2 * (var - var2.size())) + 1] = par4[(var - var2.size()) == 0 ? 1 : (var - var2.size()) + 1];
 				}
 			}
 			
-			Recipe var9 = new Recipe(Type.SHAPED, var3, par4);
+			Recipe var9 = new Recipe(Type.SHAPED, var2, par4);
 			List<Recipe> var10 = new ArrayList<Recipe>();
 			
 			if(CRAFTING_LIST.size() >= (par0 + 1)) {
@@ -136,7 +130,7 @@ public class Crafting {
 			
 			var0 = var0 + var10.indexOf(var9);
 			
-			GameRegistry.addShapedRecipe(new ResourceLocation(var0), new ResourceLocation(var1), par4[0], var6);
+			GameRegistry.addShapedRecipe(new ResourceLocation(var0), new ResourceLocation(var1), par4[0], var5);
 		}
 	}
 	

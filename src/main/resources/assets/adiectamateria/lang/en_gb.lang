@@ -21,6 +21,7 @@ itemSubText.melty_flint=Fusilia Petram
 itemSubText.infinite_lava=Alchimia genere artificii
 itemSubText.infinite_water=Alchimia genere artificii
 itemSubText.onigiri=Hearty
+itemSubText.rice_cooked=Soft and Puffy
 
 gui.action.smelting=Smelting
 gui.action.crafting=Crafting

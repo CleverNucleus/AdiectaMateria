@@ -159,6 +159,7 @@ public class GuiBook extends GuiScreen {
 		if(buttonArray.contains(par0)) {
 			if(par0.id != currentTopic.getId()) {
 				currentTopic = topics.get(par0.id);
+				currentPageId = 0;
 			}
 		}
 		
@@ -177,7 +178,7 @@ public class GuiBook extends GuiScreen {
 	private Page intro0;
 	private Page melty0;
 	private Page smelt0;
-	private Page craft0;
+	private Page craft0, craft1;
 	private Page world0, world1, world2;
 	private Page relic0;
 	private Page plant0;
@@ -293,11 +294,23 @@ public class GuiBook extends GuiScreen {
 			
 			@Override
 			public void drawPage(int par0, int par1, float par2) {
-				drawCraftingPage(0, 10);
+				drawCraftingPage(0, 4);
 				
 				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
 				
-				describeCraftingPage(par0, par1, 0, 10, par2);
+				describeCraftingPage(par0, par1, 0, 4, par2);
+			}
+		};
+		
+		craft0 = new Page(crafting, 1) {
+			
+			@Override
+			public void drawPage(int par0, int par1, float par2) {
+				drawCraftingPage(4, 8);
+				
+				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				
+				describeCraftingPage(par0, par1, 4, 8, par2);
 			}
 		};
 		
@@ -399,6 +412,8 @@ public class GuiBook extends GuiScreen {
 				mc.getRenderItem().renderItemAndEffectIntoGUI(new ItemStack(ItemUnit.MELTY_FLINT), (width / 2) - 98 + var3, (height / 2) - 53 + (var2 * 24));
 				mc.getRenderItem().renderItemAndEffectIntoGUI(var1, (width / 2) - 38 + var3, (height / 2) - 53 + (var2 * 24));
 				mc.getRenderItem().renderItemAndEffectIntoGUI(var0, (width / 2) - 68 + var3, (height / 2) - 53 + (var2 * 24));
+				
+				mc.getRenderItem().renderItemOverlayIntoGUI(fontRenderer, var1, (width / 2) - 38 + var3, (height / 2) - 53 + (var2 * 24), "" + (var1.getCount() > 1 ? var1.getCount() : ""));
 			}
 		}
 	}
@@ -431,7 +446,7 @@ public class GuiBook extends GuiScreen {
 				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[8], (width / 2) - 87 + var3, (height / 2) - 20 + (var2 * 64));
 				mc.getRenderItem().renderItemAndEffectIntoGUI(recipe.getDisplayRecipe()[9], (width / 2) - 70 + var3, (height / 2) - 20 + (var2 * 64));
 				
-				mc.getRenderItem().renderItemOverlayIntoGUI(fontRenderer, recipe.getDisplayRecipe()[0], (width / 2) - 33 + var3, (height / 2) - 37 + (var2 * 64), recipe.getDisplayRecipe()[0].getCount() + "");
+				mc.getRenderItem().renderItemOverlayIntoGUI(fontRenderer, recipe.getDisplayRecipe()[0], (width / 2) - 33 + var3, (height / 2) - 37 + (var2 * 64), (recipe.getDisplayRecipe()[0].getCount() > 1 ? recipe.getDisplayRecipe()[0].getCount() : "") + "");
 			}
 		}
 	}
