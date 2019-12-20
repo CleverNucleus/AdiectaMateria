@@ -1,7 +1,7 @@
 package clevernucleus.adiectamateria.common.handler;
 
-import clevernucleus.adiectamateria.common.block.BlockUnit;
-import clevernucleus.adiectamateria.common.item.ItemUnit;
+import clevernucleus.adiectamateria.common.block.BlockInit;
+import clevernucleus.adiectamateria.common.item.ItemInit;
 import clevernucleus.adiectamateria.common.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -20,12 +20,12 @@ public class ItemRegistryHandler {
 	 */
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> par0) {
-		par0.getRegistry().registerAll(ItemUnit.ITEMS.toArray(new Item[0]));
+		par0.getRegistry().registerAll(ItemInit.ITEMS.toArray(new Item[0]));
 	}
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> par0) {
-		par0.getRegistry().registerAll(BlockUnit.BLOCKS.toArray(new Block[0]));
+		par0.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
 	}
 	
 	/**
@@ -34,13 +34,13 @@ public class ItemRegistryHandler {
 	 */
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent par0) {
-		for(Item var : ItemUnit.ITEMS) {
+		for(Item var : ItemInit.ITEMS) {
 			if(var instanceof IHasModel) {
 				((IHasModel)var).registerModels();
 			}
 		}
 		
-		for(Block var : BlockUnit.BLOCKS) {
+		for(Block var : BlockInit.BLOCKS) {
 			if(var instanceof IHasModel) {
 				((IHasModel)var).registerModels();
 			}

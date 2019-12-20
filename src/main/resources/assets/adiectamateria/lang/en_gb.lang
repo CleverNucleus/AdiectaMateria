@@ -1,9 +1,10 @@
 item.book_help.name=Ex Materiae Vicipaedia
 item.melty_flint.name=Melty Flint
-item.rice_paper.name=Rice Paper
+item.papery_sheet.name=Papery Sheet
 item.rice_cooked.name=Cooked Rice
 item.rice_seed.name=Rice
-item.rice_grafter.name=Rice Grafter
+item.flax_seed.name=Flax
+item.grafter.name=Grafter
 item.onigiri.name=Onigiri
 item.infinite_water.name=Infinite Water Crystal
 item.infinite_lava.name=Infinite Lava Crystal
@@ -11,8 +12,10 @@ item.infinite_lava.name=Infinite Lava Crystal
 tile.sandlamp.name=Sand Lamp
 tile.sandlamp_brick.name=Sand Lamp Brick
 tile.rice.name=Rice Crop
+tile.flax.name=Flax Crop
 tile.paperwall.name=Paper Wall
 tile.rice_block.name=Paper Woven Straw
+tile.mud_brick.name=Mud Brick
 
 itemGroup.adiectamateria=Adiecta Materia
 

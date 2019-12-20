@@ -29,7 +29,7 @@ public class ItemMeltyFlint extends Item implements IHasModel {
 		this.setRegistryName(par0);
 		this.setCreativeTab(ItemCreativeTab.MODTAB);
 		
-		ItemUnit.ITEMS.add(this);
+		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override

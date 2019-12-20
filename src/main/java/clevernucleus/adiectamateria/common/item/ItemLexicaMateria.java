@@ -21,7 +21,7 @@ public class ItemLexicaMateria extends Item implements IHasModel {
 		this.setCreativeTab(ItemCreativeTab.MODTAB);
 		this.maxStackSize = 1;
 		
-		ItemUnit.ITEMS.add(this);
+		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override

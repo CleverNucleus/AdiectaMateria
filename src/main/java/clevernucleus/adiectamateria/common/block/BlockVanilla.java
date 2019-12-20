@@ -2,7 +2,7 @@ package clevernucleus.adiectamateria.common.block;
 
 import clevernucleus.adiectamateria.common.AdiectaMateria.Core;
 import clevernucleus.adiectamateria.common.item.ItemCreativeTab;
-import clevernucleus.adiectamateria.common.item.ItemUnit;
+import clevernucleus.adiectamateria.common.item.ItemInit;
 import clevernucleus.adiectamateria.common.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -19,8 +19,8 @@ public class BlockVanilla extends Block implements IHasModel {
 		this.setSoundType(par2);
 		this.setCreativeTab(ItemCreativeTab.MODTAB);
 		
-		BlockUnit.BLOCKS.add(this);
-		ItemUnit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		BlockInit.BLOCKS.add(this);
+		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	@Override

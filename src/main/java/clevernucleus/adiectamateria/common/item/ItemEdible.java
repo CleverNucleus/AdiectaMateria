@@ -21,7 +21,7 @@ public class ItemEdible extends ItemFood implements IHasModel {
 		this.setCreativeTab(CreativeTabs.FOOD);
 		this.desc = false;
 		
-		ItemUnit.ITEMS.add(this);
+		ItemInit.ITEMS.add(this);
 	}
 	
 	public ItemEdible(String par0, int par1, float par2) {
@@ -32,7 +32,7 @@ public class ItemEdible extends ItemFood implements IHasModel {
 		this.setCreativeTab(CreativeTabs.FOOD);
 		this.desc = false;
 		
-		ItemUnit.ITEMS.add(this);
+		ItemInit.ITEMS.add(this);
 	}
 	
 	public ItemEdible addDescription() {

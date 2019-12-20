@@ -1,7 +1,7 @@
 package clevernucleus.adiectamateria.common.item;
 
 import clevernucleus.adiectamateria.common.AdiectaMateria.Core;
-import clevernucleus.adiectamateria.common.block.BlockUnit;
+import clevernucleus.adiectamateria.common.block.BlockInit;
 import clevernucleus.adiectamateria.common.util.interfaces.IHasModel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +22,7 @@ public class ItemRice extends Item implements IPlantable, IHasModel {
 		this.setRegistryName(par0);
 		this.setCreativeTab(ItemCreativeTab.MODTAB);
 		
-		ItemUnit.ITEMS.add(this);
+		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class ItemRice extends Item implements IPlantable, IHasModel {
 		IBlockState var1 = par1.getBlockState(par2);
 		
 		if(par4 == EnumFacing.UP && par0.canPlayerEdit(par2.offset(par4), par4, var0) && var1.getBlock().canSustainPlant(var1, par1, par2, EnumFacing.UP, this) && par1.isAirBlock(par2.up())) {
-			par1.setBlockState(par2.up(), BlockUnit.RICE_CROP.getDefaultState());
+			par1.setBlockState(par2.up(), BlockInit.RICE_CROP.getDefaultState());
 			var0.shrink(1);
 			
 			return EnumActionResult.SUCCESS;
@@ -46,7 +46,7 @@ public class ItemRice extends Item implements IPlantable, IHasModel {
 	
 	@Override
 	public IBlockState getPlant(IBlockAccess par0, BlockPos par1) {
-		return BlockUnit.RICE_CROP.getDefaultState();
+		return BlockInit.RICE_CROP.getDefaultState();
 	}
 	
 	@Override

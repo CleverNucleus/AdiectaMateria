@@ -50,7 +50,7 @@ public class ItemInfiniteLiquidLava extends Item implements IHasModel {
 		this.setCreativeTab(ItemCreativeTab.MODTAB);
 		this.maxStackSize = 1;
 		
-		ItemUnit.ITEMS.add(this);
+		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override
@@ -90,13 +90,13 @@ public class ItemInfiniteLiquidLava extends Item implements IHasModel {
                         par1.addStat(StatList.getObjectUseStats(this));
                         par1.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
                         
-                        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillBucket(var2, par1, ItemUnit.INFINITE_LAVA));
+                        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillBucket(var2, par1, ItemInit.INFINITE_LAVA));
                     } else if(lim1 == Material.LAVA && ((Integer)lim0.getValue(BlockLiquid.LEVEL)).intValue() == 0) {
                         par1.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
                         par0.setBlockState(var4, Blocks.AIR.getDefaultState(), 11);
                         par1.addStat(StatList.getObjectUseStats(this));
                         
-                        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillBucket(var2, par1, ItemUnit.INFINITE_LAVA));
+                        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillBucket(var2, par1, ItemInit.INFINITE_LAVA));
                     } else {
                         return new ActionResult<ItemStack>(EnumActionResult.FAIL, var2);
                     }
@@ -115,7 +115,7 @@ public class ItemInfiniteLiquidLava extends Item implements IHasModel {
                     
                     par1.addStat(StatList.getObjectUseStats(this));
                     
-                    return !par1.capabilities.isCreativeMode ? new ActionResult(EnumActionResult.SUCCESS, new ItemStack(ItemUnit.INFINITE_LAVA)) : new ActionResult(EnumActionResult.SUCCESS, var2);
+                    return !par1.capabilities.isCreativeMode ? new ActionResult(EnumActionResult.SUCCESS, new ItemStack(ItemInit.INFINITE_LAVA)) : new ActionResult(EnumActionResult.SUCCESS, var2);
                 } else {
                     return new ActionResult<ItemStack>(EnumActionResult.FAIL, var2);
                 }

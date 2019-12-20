@@ -11,7 +11,7 @@ public class ItemCreativeTab implements IConstants {
 		
         @SideOnly(Side.CLIENT)
         public ItemStack getTabIconItem() {
-            return new ItemStack(ItemUnit.MELTY_FLINT);
+            return new ItemStack(ItemInit.MELTY_FLINT);
         }
     };
 }

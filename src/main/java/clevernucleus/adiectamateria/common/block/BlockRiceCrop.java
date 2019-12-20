@@ -1,6 +1,6 @@
 package clevernucleus.adiectamateria.common.block;
 
-import clevernucleus.adiectamateria.common.item.ItemUnit;
+import clevernucleus.adiectamateria.common.item.ItemInit;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -19,18 +19,20 @@ public class BlockRiceCrop extends BlockCrops {
 	private static final AxisAlignedBB[] BOUNDS = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.8125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 	
 	public BlockRiceCrop(String par0) {
+		super();
+		
 		this.setUnlocalizedName(par0);
 		this.setRegistryName(par0);
 		
-		BlockUnit.BLOCKS.add(this);
-		ItemUnit.ITEMS.add(new ItemBlock(this).setRegistryName(getRegistryName()));
+		BlockInit.BLOCKS.add(this);
+		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	@Override
 	public boolean onBlockActivated(World par0, BlockPos par1, IBlockState par2, EntityPlayer par3, EnumHand par4, EnumFacing par5, float par6, float par7, float par8) {
 		if(!par0.isRemote) {
 			if(this.isMaxAge(par2)) {
-				par0.spawnEntity(new EntityItem(par0, par1.getX(), par1.getY(), par1.getZ(), new ItemStack(ItemUnit.RICE, 2)));
+				par0.spawnEntity(new EntityItem(par0, par1.getX(), par1.getY(), par1.getZ(), new ItemStack(ItemInit.RICE, 2)));
 				par0.setBlockState(par1, this.withAge(0));
 				
 				return true;
@@ -42,12 +44,12 @@ public class BlockRiceCrop extends BlockCrops {
 	
 	@Override
 	protected Item getSeed() {
-		return ItemUnit.RICE;
+		return ItemInit.RICE;
 	}
 	
 	@Override 
 	protected Item getCrop() {
-		return ItemUnit.RICE;
+		return ItemInit.RICE;
 	}
 	
 	@Override
