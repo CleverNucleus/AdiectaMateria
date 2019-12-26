@@ -38,27 +38,27 @@ Baubles is no longer even an optional dependency, as Trinkets have been removed.
 # Dev / Changelog
 This is a complete rewrite, but some core aspects have remained; note that the mod is not built with cross version world compatibility, as I usually start a new world with every version anyway - my mod, my rules.
 
-+Added *Melty Flint*: This item functions as a core aspect of the mod.
-+Added a fully fleshed out guide book, *Ex Materiae Vicipaedia*.
-+Implemented a *"world crafting"* system: This is how *Melty Flint* is used - in essence, one can transform/transmute many different types of blocks into many different other blocks/variants/items --> all recipes are listed in the book and how to use them.
-+Added *Rice*: Rice is a seed/food, used to plant rice crop and make other rice related foods.
-+Added *Flax*: Flax is a really good looking 4 block tall fast growing crop that literally only exists to produce string.
-+Added *Bone Crop*: Bones can now be planted into the ground to grow a new bush, which drops more bones.
-+Added the *Grafter*: A hoe/scythe type tool that is used to initially get Rice/Flax - the book explains how.
-+Added Custom Decorative Blocks/Panes/Panels:
-  +*Paper Wall*: Japan style Pane.
-  +*Paper Woven Straw*: Aesthetic Block.
-  +*Sand Lamp*: A light source that actually looks nice.
-  +*Sand Lamp Brick*: Sand Lamp variant.
-  +*Mud Brick*: Stronger Dirt that looks nice.
+ - +Added *Melty Flint*: This item functions as a core aspect of the mod.
+ - +Added a fully fleshed out guide book, *Ex Materiae Vicipaedia*.
+ - +Implemented a *"world crafting"* system: This is how *Melty Flint* is used - in essence, one can transform/transmute many different types of blocks into many different other blocks/variants/items --> all recipes are listed in the book and how to use them.
+ - +Added *Rice*: Rice is a seed/food, used to plant rice crop and make other rice related foods.
+ - +Added *Flax*: Flax is a really good looking 4 block tall fast growing crop that literally only exists to produce string.
+ - +Added *Bone Crop*: Bones can now be planted into the ground to grow a new bush, which drops more bones.
+ - +Added the *Grafter*: A hoe/scythe type tool that is used to initially get Rice/Flax - the book explains how.
+ - +Added Custom Decorative Blocks/Panes/Panels:
+   - +*Paper Wall*: Japan style Pane.
+   - +*Paper Woven Straw*: Aesthetic Block.
+   - +*Sand Lamp*: A light source that actually looks nice.
+   - +*Sand Lamp Brick*: Sand Lamp variant.
+   - +*Mud Brick*: Stronger Dirt that looks nice.
 
-+Added *Papery Sheet*: An item made from rice that can be used to make paper more efficiently, and other things like nametags - look in the guide book.
-+Added *Infinite Lava Crystal*: Basically a really expensive bucket that has infinite lava.
-+Added *Infinite Water Crystal*: Another really expensive bucket that has infinite water.
-  *Thermal Foundation/Dynamics interaction*: These infinite liquid crystals can be used in the *Fluid Transposer* to provide infinite volumes of their respective liquids - at a very rapid rate as well.
+ - +Added *Papery Sheet*: An item made from rice that can be used to make paper more efficiently, and other things like nametags - look in the guide book.
+ - +Added *Infinite Lava Crystal*: Basically a really expensive bucket that has infinite lava.
+ - +Added *Infinite Water Crystal*: Another really expensive bucket that has infinite water.
+  - *Thermal Foundation/Dynamics interaction*: These infinite liquid crystals can be used in the *Fluid Transposer* to provide infinite volumes of their respective liquids - at a very rapid rate as well.
 
-+Added *Gold Bars*: An aesthetic form of gold - equivalent to 3 gold ingots. 
-+Added *Gold Bars* as loot to *Underground Mineshafts*, *Desert Pyramids*, *Jungle Temples* and *Village Blacksmiths*. Note that they have a 50% chance to occur. 
+ - +Added *Gold Bars*: An aesthetic form of gold - equivalent to 3 gold ingots. 
+ - +Added *Gold Bars* as loot to *Underground Mineshafts*, *Desert Pyramids*, *Jungle Temples* and *Village Blacksmiths*. Note that they have a 50% chance to occur. 
 
 **Guide Book** 
 The guide book necessitated a custom recipe implementation so that the extra recipes could not only be registered to the game but also to the book for display purposes. This implementation has been refined and polished into an efficient loading mechanic - that registers the recipes on game init, but only registers them to the book when the book is opened so that minimum memory is used. When the book is closed the recipes are unloaded again. This involves extra processing, however this only occurs on the client as it is only for display use. 
