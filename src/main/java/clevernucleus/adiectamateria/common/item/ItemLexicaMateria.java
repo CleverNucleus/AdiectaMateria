@@ -36,9 +36,6 @@ public class ItemLexicaMateria extends Item implements IHasModel {
 		ItemStack var0 = par1.getHeldItem(par2);
 		
 		if(!par1.isSneaking()) {
-			/*if(par0.isRemote) {
-				Core.proxy.displayBook(par1);
-			}*/
 			Common.proxy(par0.isRemote).displayBook(par1);
 		}
 		

@@ -10,8 +10,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public class BlockVanilla extends Block implements IHasModel {
-	public BlockVanilla(String par0, Material par1, SoundType par2) {
+public class BlockDecorative extends Block implements IHasModel {
+	public BlockDecorative(String par0, Material par1, SoundType par2) {
 		super(par1);
 		
 		this.setUnlocalizedName(par0);

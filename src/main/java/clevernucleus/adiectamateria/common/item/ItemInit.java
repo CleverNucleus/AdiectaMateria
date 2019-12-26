@@ -3,7 +3,6 @@ package clevernucleus.adiectamateria.common.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import clevernucleus.adiectamateria.common.block.BlockInit;
 import net.minecraft.item.Item;
 
 public class ItemInit {
@@ -14,7 +13,8 @@ public class ItemInit {
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	
 	public static final Item MELTY_FLINT = new ItemMeltyFlint("melty_flint");
-	public static final Item PAPERY_SHEET = new ItemPaperySheet("papery_sheet");
+	public static final Item PAPERY_SHEET = new ItemBasic("papery_sheet");
+	public static final Item GOLD_BARS = new ItemBasic("gold_bars");
 	public static final Item RICE_COOKED = new ItemEdible("rice_cooked", 1, 0.3F);
 	public static final Item RICE = new ItemRice("rice_seed");
 	public static final Item FLAX = new ItemFlax("flax_seed");

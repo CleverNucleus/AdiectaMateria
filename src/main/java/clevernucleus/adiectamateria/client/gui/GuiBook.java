@@ -27,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.HoverChecker;
+import net.minecraftforge.fml.common.Loader;
 
 public class GuiBook extends GuiScreen {
 	public final ResourceLocation texture = new ResourceLocation(IConstants.MODID, "textures/gui/book.png");
@@ -44,7 +45,6 @@ public class GuiBook extends GuiScreen {
 	private Topic smelting;
 	private Topic crafting;
 	private Topic world_crafting;
-	private Topic relics;
 	private Topic plants;
 	
 	private byte currentPageId = 0;
@@ -55,8 +55,7 @@ public class GuiBook extends GuiScreen {
 		smelting = new Topic("smelting", 2, new ItemStack(Blocks.FURNACE)).add(topics);
 		crafting = new Topic("crafting", 3, new ItemStack(Blocks.CRAFTING_TABLE)).add(topics);
 		world_crafting = new Topic("world_crafting", 4, new ItemStack(Blocks.GRASS)).add(topics);
-		relics = new Topic("relics", 5, new ItemStack(Items.TOTEM_OF_UNDYING)).add(topics);
-		plants = new Topic("plants", 6, new ItemStack(Items.BEETROOT_SEEDS)).add(topics);
+		plants = new Topic("plants", 5, new ItemStack(Items.BEETROOT_SEEDS)).add(topics);
 		
 		currentTopic = introduction;
 		
@@ -178,10 +177,11 @@ public class GuiBook extends GuiScreen {
 	private Page intro0;
 	private Page melty0;
 	private Page smelt0;
-	private Page craft0, craft1, craft2, craft3, craft4, craft5;
+	private Page craft0, craft1, craft2, craft3, craft4, craft5, craft6, craft7;
 	private Page world0, world1, world2;
-	private Page relic0;
-	private Page plant0;
+	private Page plant0, plant1;
+	
+	private int craft = (Loader.isModLoaded(IConstants.MODID_AE2) ? 8 : 7), world = 3;
 	
 	public void init() {
 		intro0 = new Page(introduction, 0) {
@@ -297,6 +297,7 @@ public class GuiBook extends GuiScreen {
 				drawCraftingPage(0, 4);
 				
 				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("1 / " + craft, (width / 2) - (mc.fontRenderer.getStringWidth("1 / " + craft) / 2), (height / 2) + 78, 0x1D1D1D);
 				
 				describeCraftingPage(par0, par1, 0, 4, par2);
 			}
@@ -309,6 +310,7 @@ public class GuiBook extends GuiScreen {
 				drawCraftingPage(4, 8);
 				
 				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("2 / " + craft, (width / 2) - (mc.fontRenderer.getStringWidth("2 / " + craft) / 2), (height / 2) + 78, 0x1D1D1D);
 				
 				describeCraftingPage(par0, par1, 4, 8, par2);
 			}
@@ -321,6 +323,7 @@ public class GuiBook extends GuiScreen {
 				drawCraftingPage(8, 12);
 				
 				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("3 / " + craft, (width / 2) - (mc.fontRenderer.getStringWidth("3 / " + craft) / 2), (height / 2) + 78, 0x1D1D1D);
 				
 				describeCraftingPage(par0, par1, 8, 12, par2);
 			}
@@ -333,6 +336,7 @@ public class GuiBook extends GuiScreen {
 				drawCraftingPage(12, 16);
 				
 				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("4 / " + craft, (width / 2) - (mc.fontRenderer.getStringWidth("4 / " + craft) / 2), (height / 2) + 78, 0x1D1D1D);
 				
 				describeCraftingPage(par0, par1, 12, 16, par2);
 			}
@@ -345,6 +349,7 @@ public class GuiBook extends GuiScreen {
 				drawCraftingPage(16, 20);
 				
 				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("5 / " + craft, (width / 2) - (mc.fontRenderer.getStringWidth("5 / " + craft) / 2), (height / 2) + 78, 0x1D1D1D);
 				
 				describeCraftingPage(par0, par1, 16, 20, par2);
 			}
@@ -357,10 +362,39 @@ public class GuiBook extends GuiScreen {
 				drawCraftingPage(20, 24);
 				
 				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("6 / " + craft, (width / 2) - (mc.fontRenderer.getStringWidth("6 / " + craft) / 2), (height / 2) + 78, 0x1D1D1D);
 				
 				describeCraftingPage(par0, par1, 20, 24, par2);
 			}
 		};
+		
+		craft6 = new Page(crafting, 6) {
+			
+			@Override
+			public void drawPage(int par0, int par1, float par2) {
+				drawCraftingPage(24, 28);
+				
+				mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("7 / " + craft, (width / 2) - (mc.fontRenderer.getStringWidth("7 / " + craft) / 2), (height / 2) + 78, 0x1D1D1D);
+				
+				describeCraftingPage(par0, par1, 24, 28, par2);
+			}
+		};
+		
+		if(Loader.isModLoaded(IConstants.MODID_AE2)) {
+			craft7 = new Page(crafting, 7) {
+				
+				@Override
+				public void drawPage(int par0, int par1, float par2) {
+					drawCraftingPage(28, 32);
+					
+					mc.fontRenderer.drawString(crafting.getDisplayName(), (width / 2) - 101, (height / 2) - 78, 0x1D1D1D);
+					mc.fontRenderer.drawString("8 / " + craft, (width / 2) - (mc.fontRenderer.getStringWidth("8 / " + craft) / 2), (height / 2) + 78, 0x1D1D1D);
+					
+					describeCraftingPage(par0, par1, 28, 32, par2);
+				}
+			};
+		}
 		
 		world0 = new Page(world_crafting, 0) {
 			
@@ -369,6 +403,7 @@ public class GuiBook extends GuiScreen {
 				drawTransmutingPage(0, 10);
 				
 				mc.fontRenderer.drawString(world_crafting.getDisplayName(), (width / 2) - 94, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("1 / " + world, (width / 2) - (mc.fontRenderer.getStringWidth("1 / " + world) / 2), (height / 2) + 78, 0x1D1D1D);
 				
 				describeTransmutingPage(par0, par1, 0, 10, par2);
 			}
@@ -381,6 +416,7 @@ public class GuiBook extends GuiScreen {
 				drawTransmutingPage(10, 20);
 				
 				mc.fontRenderer.drawString(world_crafting.getDisplayName(), (width / 2) - 94, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("2 / " + world, (width / 2) - (mc.fontRenderer.getStringWidth("2 / " + world) / 2), (height / 2) + 78, 0x1D1D1D);
 				
 				describeTransmutingPage(par0, par1, 10, 20, par2);
 			}
@@ -393,16 +429,9 @@ public class GuiBook extends GuiScreen {
 				drawTransmutingPage(20, 30);
 				
 				mc.fontRenderer.drawString(world_crafting.getDisplayName(), (width / 2) - 94, (height / 2) - 78, 0x1D1D1D);
+				mc.fontRenderer.drawString("3 / " + world, (width / 2) - (mc.fontRenderer.getStringWidth("3 / " + world) / 2), (height / 2) + 78, 0x1D1D1D);
 				
 				describeTransmutingPage(par0, par1, 20, 30, par2);
-			}
-		};
-		
-		relic0 = new Page(relics, 0) {
-			
-			@Override
-			public void drawPage(int par0, int par1, float par2) {
-				mc.fontRenderer.drawString(relics.getDisplayName(), (width / 2) - 83, (height / 2) - 78, 0x1D1D1D);
 			}
 		};
 		
@@ -410,7 +439,81 @@ public class GuiBook extends GuiScreen {
 			
 			@Override
 			public void drawPage(int par0, int par1, float par2) {
+				mc.renderEngine.bindTexture(texture);
+				
+				drawTexturedModalRect((width / 2) + 47, (height / 2) - 25, 38, 200, 20, 20);
+				
+				mc.getRenderItem().renderItemAndEffectIntoGUI(new ItemStack(ItemInit.GRAFTER), (width / 2) + 49, (height / 2) - 23);
+				
+				GlStateManager.pushMatrix();
+				GlStateManager.scale(0.8F, 0.8F, 0.8F);
+				
+				mc.fontRenderer.drawSplitString(I18n.format(this.getText() + 0), (int)(1.25F * ((width / 2) - 112)), (int)(1.25F * ((height / 2) - 55)), 135, 0x1D1D1D);
+				mc.fontRenderer.drawSplitString(I18n.format(this.getText() + 1), (int)(1.25F * ((width / 2) + 12)), (int)(1.25F * ((height / 2) - 55)), 135, 0x1D1D1D);
+				mc.fontRenderer.drawSplitString(mc.gameSettings.keyBindUseItem.getDisplayName() + I18n.format(this.getText() + 2), (int)(1.25F * ((width / 2) + 12)), (int)(1.25F * ((height / 2) + 10)), 130, 0x1D1D1D);
+				
+				GlStateManager.popMatrix();
+				
 				mc.fontRenderer.drawString(plants.getDisplayName(), (width / 2) - 80, (height / 2) - 78, 0x1D1D1D);
+				
+				HoverChecker var0 = new HoverChecker((height / 2) - 23, (height / 2) - 7, (width / 2) + 49, (width / 2) + 65, 0);
+				
+				List<String> var1 = new ArrayList<String>();
+				
+				if(var0.checkHover(par0, par1)) {
+					var1.add(new ItemStack(ItemInit.GRAFTER).getDisplayName());
+					
+					drawHoveringText(var1, par0, par1);
+				}
+			}
+		};
+		
+		plant1 = new Page(plants, 1) {
+			
+			@Override
+			public void drawPage(int par0, int par1, float par2) {
+				mc.renderEngine.bindTexture(texture);
+				
+				drawTexturedModalRect((width / 2) + 20, (height / 2) + 50, 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) + 50, (height / 2) + 50, 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) + 80, (height / 2) + 50, 38, 200, 20, 20);
+				
+				mc.getRenderItem().renderItemAndEffectIntoGUI(new ItemStack(ItemInit.RICE), (width / 2) + 22, (height / 2) + 52);
+				mc.getRenderItem().renderItemAndEffectIntoGUI(new ItemStack(ItemInit.FLAX), (width / 2) + 52, (height / 2) + 52);
+				mc.getRenderItem().renderItemAndEffectIntoGUI(new ItemStack(Items.BONE), (width / 2) + 82, (height / 2) + 52);
+				
+				GlStateManager.pushMatrix();
+				GlStateManager.scale(0.8F, 0.8F, 0.8F);
+				
+				mc.fontRenderer.drawSplitString(mc.gameSettings.keyBindUseItem.getDisplayName() + I18n.format(this.getText() + 0), (int)(1.25F * ((width / 2) - 112)), (int)(1.25F * ((height / 2) - 55)), 135, 0x1D1D1D);
+				mc.fontRenderer.drawSplitString(I18n.format(this.getText() + 1), (int)(1.25F * ((width / 2) - 112)), (int)(1.25F * ((height / 2) + 20)), 135, 0x1D1D1D);
+				mc.fontRenderer.drawSplitString(I18n.format(this.getText() + 2), (int)(1.25F * ((width / 2) + 12)), (int)(1.25F * ((height / 2) - 55)), 130, 0x1D1D1D);
+				mc.fontRenderer.drawSplitString(I18n.format(this.getText() + 3), (int)(1.25F * ((width / 2) + 12)), (int)(1.25F * ((height / 2) - 10)), 130, 0x1D1D1D);
+				mc.fontRenderer.drawSplitString(I18n.format(this.getText() + 4), (int)(1.25F * ((width / 2) + 12)), (int)(1.25F * ((height / 2) + 20)), 130, 0x1D1D1D);
+				
+				GlStateManager.popMatrix();
+				
+				mc.fontRenderer.drawString(plants.getDisplayName(), (width / 2) - 80, (height / 2) - 78, 0x1D1D1D);
+				
+				HoverChecker var0 = new HoverChecker((height / 2) + 52, (height / 2) + 68, (width / 2) + 22, (width / 2) + 38, 0);
+				HoverChecker var1 = new HoverChecker((height / 2) + 52, (height / 2) + 68, (width / 2) + 52, (width / 2) + 68, 0);
+				HoverChecker var2 = new HoverChecker((height / 2) + 52, (height / 2) + 68, (width / 2) + 82, (width / 2) + 98, 0);
+				
+				List<String> var3 = new ArrayList<String>();
+				
+				if(var0.checkHover(par0, par1)) {
+					var3.add(new ItemStack(ItemInit.RICE).getDisplayName());
+					
+					drawHoveringText(var3, par0, par1);
+				} else if(var1.checkHover(par0, par1)) {
+					var3.add(new ItemStack(ItemInit.FLAX).getDisplayName());
+					
+					drawHoveringText(var3, par0, par1);
+				} else if(var2.checkHover(par0, par1)) {
+					var3.add(new ItemStack(Items.BONE).getDisplayName());
+					
+					drawHoveringText(var3, par0, par1);
+				}
 			}
 		};
 	}
@@ -426,14 +529,14 @@ public class GuiBook extends GuiScreen {
 				
 				mc.renderEngine.bindTexture(texture);
 				
-				drawTexturedModalRect((width / 2) - 100 + var3, (height / 2) - 55 + (var2 * 24) - var3, 38, 200, 20, 20);
-				drawTexturedModalRect((width / 2) - 40 + var3, (height / 2) - 55 + (var2 * 24) - var3, 38, 200, 20, 20);
-				drawTexturedModalRect((width / 2) - 70 + var3, (height / 2) - 55 + (var2 * 24) - var3, 37, 220, 21, 20);
+				drawTexturedModalRect((width / 2) - 100 + var3, (height / 2) - 55 + (var2 * 24), 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) - 40 + var3, (height / 2) - 55 + (var2 * 24), 38, 200, 20, 20);
+				drawTexturedModalRect((width / 2) - 70 + var3, (height / 2) - 55 + (var2 * 24), 37, 220, 21, 20);
 				
-				mc.getRenderItem().renderItemAndEffectIntoGUI(var[0], (width / 2) - 98 + var3, (height / 2) - 53 + (var2 * 24) - var3);
-				mc.getRenderItem().renderItemAndEffectIntoGUI(var[1], (width / 2) - 38 + var3, (height / 2) - 53 + (var2 * 24) - var3);
+				mc.getRenderItem().renderItemAndEffectIntoGUI(var[0], (width / 2) - 98 + var3, (height / 2) - 53 + (var2 * 24));
+				mc.getRenderItem().renderItemAndEffectIntoGUI(var[1], (width / 2) - 38 + var3, (height / 2) - 53 + (var2 * 24));
 				
-				mc.getRenderItem().renderItemOverlayIntoGUI(fontRenderer, var[1], (width / 2) - 38 + var3, (height / 2) - 53 + (var2 * 24) - var3, "" + (var[1].getCount() > 1 ? var[1].getCount() : ""));
+				mc.getRenderItem().renderItemOverlayIntoGUI(fontRenderer, var[1], (width / 2) - 38 + var3, (height / 2) - 53 + (var2 * 24), "" + (var[1].getCount() > 1 ? var[1].getCount() : ""));
 			}
 		}
 	}

@@ -1,8 +1,10 @@
 package clevernucleus.adiectamateria.common;
 
+import clevernucleus.adiectamateria.common.handler.UseHandler;
 import clevernucleus.adiectamateria.common.util.interfaces.IConstants;
 import clevernucleus.adiectamateria.common.util.interfaces.IProxy;
 import clevernucleus.adiectamateria.common.util.recipes.Recipes;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -20,6 +22,8 @@ public class AdiectaMateria implements IConstants {
 		@EventHandler
 		public void preInit(FMLPreInitializationEvent par0) {
 			proxy.preInit(par0);
+			
+			MinecraftForge.EVENT_BUS.register(new UseHandler());
 		}
 		
 		@EventHandler

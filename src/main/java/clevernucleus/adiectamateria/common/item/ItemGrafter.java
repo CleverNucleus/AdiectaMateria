@@ -7,20 +7,15 @@ import clevernucleus.adiectamateria.common.util.interfaces.IHasModel;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockDoublePlant.EnumPlantType;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -75,23 +70,6 @@ public class ItemGrafter extends Item implements IHasModel {
 		
 		return var2;
 	}
-	
-	@Override
-    public boolean itemInteractionForEntity(ItemStack par0, net.minecraft.entity.player.EntityPlayer par1, EntityLivingBase par2, net.minecraft.util.EnumHand par3) {
-        if(par1.world.isRemote) {
-            return false;
-        }
-        
-        if(par2 instanceof EntityChicken && par2.getHealth() > (par2.getMaxHealth() / 2)) {
-        	par2.attackEntityFrom(DamageSource.GENERIC, 4.0F);
-        	par2.entityDropItem(new ItemStack(Items.FEATHER, itemRand.nextInt(5) + itemRand.nextInt(4) + itemRand.nextInt(3) + 1), 1);
-        	par0.damageItem(1, par1);
-        	
-        	return true;
-        }
-        
-        return false;
-    }
 	
 	@Override
 	public boolean isFull3D() {

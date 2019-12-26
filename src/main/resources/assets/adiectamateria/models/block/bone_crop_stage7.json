@@ -1,0 +1,6 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "adiectamateria:blocks/bone_crop_stage_7"
+    }
+}

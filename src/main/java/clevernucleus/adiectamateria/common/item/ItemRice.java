@@ -36,7 +36,8 @@ public class ItemRice extends Item implements IPlantable, IHasModel {
 			
 			return EnumActionResult.SUCCESS;
 		}
-		else return EnumActionResult.FAIL;
+		
+		return EnumActionResult.FAIL;
 	}
 	
 	@Override

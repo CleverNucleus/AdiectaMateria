@@ -25,7 +25,6 @@ public class BlockRiceCrop extends BlockCrops {
 		this.setRegistryName(par0);
 		
 		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	@Override

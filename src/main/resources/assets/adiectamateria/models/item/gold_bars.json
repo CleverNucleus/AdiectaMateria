@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "adiectamateria:blocks/flax_stage_7"
+        "layer0": "adiectamateria:items/gold_bars"
     }
 }
