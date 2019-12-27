@@ -41,8 +41,8 @@ gui.topic.crafting=Crafting Recipes
 gui.topic.world_crafting=World Recipes
 gui.topic.plants=Plants
 
-gui.page.introduction.0.0=Welcome to the exciting world of material science. This book acts as a guide to those wishing to dabble in the art. Material Science is centred around the use of Melty Flint to transform matter into various other forms. 
-gui.page.introduction.0.1=The first 'Crafter to start thinking about materials and their relationship to one another was a latin philosopher. This book is a copy of the philosopher's original journal, translated down through the ages.
+gui.page.introduction.0.0=Welcome to the exciting world of material science. This book acts as a guide to those wishing to dabble in the art. Material Science is centered around the use of Melty Flint to transform matter into various other forms. 
+gui.page.introduction.0.1=The first 'Crafter to start thinking about materials and their relationship to one another was a latin sorcerer. This book is a copy of the sorcerer's original journal, translated down through the ages.
 gui.page.introduction.0.2=This book can be procured using the following world crafting interaction;
 
 gui.page.melty_flint.0.0=Melty Flint is a quasi stable catalyst; well, it is and it isn't. It is a catalyst in the sense that it is needed to initiate a reaction transforming different types of matter into other types of matter. It is not a catalyst in the usual sense because in the reation it is used up completely.
