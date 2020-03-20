@@ -2,6 +2,7 @@ package clevernucleus.adiectamateria.client;
 
 import java.util.Random;
 
+import clevernucleus.adiectamateria.client.gui.GuiBook;
 import clevernucleus.adiectamateria.common.util.IProxy;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -57,7 +58,7 @@ public class ClientProxy implements IProxy {
 	@Override
 	public void displayBook(EntityPlayer par0, boolean par1) {
 		if(par1) {
-			FMLClientHandler.instance().displayGuiScreen(par0, null);
+			FMLClientHandler.instance().displayGuiScreen(par0, new GuiBook());
 		}
 	}
 	
