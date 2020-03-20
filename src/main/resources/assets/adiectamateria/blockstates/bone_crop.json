@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "age=0,stage=false": { "model": "adiectamateria:bone_crop_stage0" },
+        "age=1,stage=false": { "model": "adiectamateria:bone_crop_stage1" },
+        "age=2,stage=false": { "model": "adiectamateria:bone_crop_stage2" },
+        "age=3,stage=false": { "model": "adiectamateria:bone_crop_stage3" },
+        "age=4,stage=false": { "model": "adiectamateria:bone_crop_stage4" },
+        "age=5,stage=false": { "model": "adiectamateria:bone_crop_stage5" },
+        "age=6,stage=false": { "model": "adiectamateria:bone_crop_stage6" },
+        "age=7,stage=false": { "model": "adiectamateria:bone_crop_stage7" },
+		"age=0,stage=true": { "model": "adiectamateria:bone_crop_top" },
+        "age=1,stage=true": { "model": "adiectamateria:bone_crop_top" },
+        "age=2,stage=true": { "model": "adiectamateria:bone_crop_top" },
+        "age=3,stage=true": { "model": "adiectamateria:bone_crop_top" },
+        "age=4,stage=true": { "model": "adiectamateria:bone_crop_top" },
+        "age=5,stage=true": { "model": "adiectamateria:bone_crop_top" },
+        "age=6,stage=true": { "model": "adiectamateria:bone_crop_top" },
+        "age=7,stage=true": { "model": "adiectamateria:bone_crop_top" }
+    }
+}

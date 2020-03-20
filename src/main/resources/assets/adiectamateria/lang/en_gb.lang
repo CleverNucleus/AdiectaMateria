@@ -1,0 +1,60 @@
+item.book_help.name=Ex Materiae Vicipaedia
+item.melty_flint.name=Melty Flint
+item.papery_sheet.name=Papery Sheet
+item.gold_bars.name=Gold Bars
+item.rice_cooked.name=Cooked Rice
+item.rice_seed.name=Rice
+item.flax_seed.name=Flax
+item.grafter.name=Grafter
+item.onigiri.name=Onigiri
+item.infinite_water.name=Infinite Water Crystal
+item.infinite_lava.name=Infinite Lava Crystal
+
+tile.sandlamp.name=Sand Lamp
+tile.sandlamp_brick.name=Sand Lamp Brick
+tile.rice.name=Rice Crop
+tile.flax.name=Flax Crop
+tile.bone_crop.name=Bone Crop
+tile.paperwall.name=Paper Wall
+tile.rice_block.name=Paper Woven Straw
+tile.mud_brick.name=Mud Brick
+
+itemGroup.adiectamateria=Adiecta Materia
+
+itemSubText.book_help=Material Science
+itemSubText.melty_flint=Fusilia Petram
+itemSubText.infinite_lava=Alchimia genere artificii
+itemSubText.infinite_water=Alchimia genere artificii
+itemSubText.onigiri=Hearty
+itemSubText.rice_cooked=Soft and Puffy
+
+gui.action.smelting=Smelting
+gui.action.crafting=Crafting
+gui.action.shaped=Shaped Crafting
+gui.action.shapeless=Shapeless Crafting
+gui.action.modded=Custom Crafting
+
+gui.topic.introduction=Introduction
+gui.topic.melty_flint=Melty Flint
+gui.topic.smelting=Smelting Recipes
+gui.topic.crafting=Crafting Recipes
+gui.topic.world_crafting=World Recipes
+gui.topic.plants=Plants
+
+gui.page.introduction.0.0=Welcome to the exciting world of material science. This book acts as a guide to those wishing to dabble in the art. Material Science is centred around the use of Melty Flint to transform matter into various other forms. 
+gui.page.introduction.0.1=The first 'Crafter to start thinking about materials and their relationship to one another was a latin philosopher. This book is a copy of the philosopher's original journal, translated down through the ages.
+gui.page.introduction.0.2=This book can be procured using the following world crafting interaction;
+
+gui.page.melty_flint.0.0=Melty Flint is a quasi stable catalyst; well, it is and it isn't. It is a catalyst in the sense that it is needed to initiate a reaction transforming different types of matter into other types of matter. It is not a catalyst in the usual sense because in the reation it is used up completely.
+gui.page.melty_flint.0.1=Melty Flint's material structure is similar to that of an amorphous solid - like glass. It differs from glass however as it is always changing shape under its own energy, feels warm to the touch and doesn't shatter. 
+gui.page.melty_flint.0.2=It can be made like so;
+gui.page.melty_flint.0.3=This item can change the type of matter some blocks are made of by using it on the blocks.
+
+gui.page.plants.0.0=Three new crops have been found: Rice, Flax and the Bone Crop. Rice is a single block strain of grass, much like wheat. Flax grows up to 4 blocks tall and shows that it is fully grown by the blue flowers that appear on the top. Flax is a strain of vine that is rigid enough to stand by itself. Bone crop 'grows' by using minerals from the ground to form a lattice structure. It can grow to 3 blocks tall, and is fully grown when red flowers appear.
+gui.page.plants.0.1=Rice and Flax seed is initially procured using the Grafter.
+gui.page.plants.0.2=ing on tall or short grass with the grafter has a 20 percent chance to drop rice seed, which can then be planted on farmland - like wheat. Rice grows at the same pace as wheat.
+gui.page.plants.1.0=ing on vines with the grafter has a 20 percent chance to drop flax seed, which can then be planted on farmland - like wheat. Flax grows faster than wheat/sugar cane, but has more growing to do as it is taller.
+gui.page.plants.1.1=Taking a regular bone and planting it in farmland will plant bone crop. Bone crop is as tall as sugar cane and grows as fast - look for the red flowers when it is fully grown!
+gui.page.plants.1.2=Rice can be used as a food source (Onigiri) but also to make Papery Sheets, which are useful for a variety of things.
+gui.page.plants.1.3=Flax is used to create String, which in turn is very useful.
+gui.page.plants.1.4=Bone Crop only produces more bones - good for mineral gathering but slightly spooky.
