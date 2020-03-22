@@ -24,7 +24,7 @@ public class Recipes {
 		Smelting.addRecipe(new ItemStack(ItemInit.RICE), new ItemStack(ItemInit.RICE_COOKED));
 		Smelting.addRecipe(new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Items.LEATHER));
 		Smelting.addRecipe(new ItemStack(Blocks.ICE), new ItemStack(Items.SNOWBALL, 4));
-		Smelting.addRecipe(new ItemStack(Blocks.DIRT), new ItemStack(BlockInit.MUD_BRICK));
+		Smelting.addRecipe(new ItemStack(ItemInit.GOLD_BARS), new ItemStack(Items.GOLD_INGOT, 3));
 		
 		if(Loader.isModLoaded(Util.MODID_TC)) {
 			Smelting.addRecipe(new ItemStack(Items.BONE), new ItemStack(Item.getByNameOrId("tconstruct:materials"), 1, 17));
@@ -75,8 +75,7 @@ public class Recipes {
 		Crafting.addShapedRecipe(24, "ABA", "BCB", "ABA", new ItemStack(ItemInit.INFINITE_LAVA, 1), new ItemStack(Blocks.DIAMOND_BLOCK), new ItemStack(ItemInit.MELTY_FLINT), new ItemStack(Items.LAVA_BUCKET));
 		Crafting.addShapedRecipe(25, "ABA", "BCB", "ABA", new ItemStack(ItemInit.INFINITE_WATER, 1), new ItemStack(ItemInit.MELTY_FLINT), new ItemStack(Blocks.DIAMOND_BLOCK), new ItemStack(Items.WATER_BUCKET));
 		Crafting.addShapedRecipe(25, "ABA", "BCB", "ABA", new ItemStack(ItemInit.INFINITE_WATER, 1), new ItemStack(Blocks.DIAMOND_BLOCK), new ItemStack(ItemInit.MELTY_FLINT), new ItemStack(Items.WATER_BUCKET));
-		Crafting.addShapelessRecipe(26, new ItemStack(Items.GOLD_INGOT, 3), new ItemStack(ItemInit.GOLD_BARS));
-		Crafting.addShapelessRecipe(26, new ItemStack(ItemInit.GOLD_BARS), new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.GOLD_INGOT));
+		Crafting.addShapedRecipe(26, "AA ", "AA ", "", new ItemStack(BlockInit.MUD_BRICK_WET, 1), new ItemStack(Blocks.DIRT));
 		
 		if(Loader.isModLoaded(Util.MODID_AE2) && Loader.isModLoaded(Util.MODID_TC)) {
 			Crafting.addShapelessRecipe(27, new ItemStack(Item.getByNameOrId("appliedenergistics2:sky_stone_block"), 1), new ItemStack(Blocks.STONE, 1, 0), new ItemStack(Items.GLOWSTONE_DUST));
@@ -147,33 +146,35 @@ public class Recipes {
 		Transmuting.add(14, new Component(Blocks.STONE).addProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH), new Component(Blocks.STONE).addProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH));
 		Transmuting.add(14, new Component(Blocks.STONE).addProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH), new Component(Blocks.STONE).addProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH));
 		Transmuting.add(14, new Component(Blocks.STONE).addProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH), new Component(Blocks.STONE).addProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH));
+		Transmuting.add(15, new Component(BlockInit.MUD_BRICK_WET), new Component(BlockInit.MUD_BRICK_DRY));
+		Transmuting.add(15, new Component(BlockInit.MUD_BRICK_DRY), new Component(BlockInit.MUD_BRICK_WET));
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.add(15, new Component(Blocks.WOOL).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.WOOL).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
+			Transmuting.add(16, new Component(Blocks.WOOL).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.WOOL).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.add(16, new Component(Blocks.STAINED_GLASS).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.STAINED_GLASS).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
+			Transmuting.add(17, new Component(Blocks.STAINED_GLASS).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.STAINED_GLASS).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.add(17, new Component(Blocks.STAINED_GLASS_PANE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.STAINED_GLASS_PANE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
+			Transmuting.add(18, new Component(Blocks.STAINED_GLASS_PANE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.STAINED_GLASS_PANE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.add(18, new Component(Blocks.STAINED_HARDENED_CLAY).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.STAINED_HARDENED_CLAY).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
+			Transmuting.add(19, new Component(Blocks.STAINED_HARDENED_CLAY).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.STAINED_HARDENED_CLAY).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.add(19, new Component(Blocks.CONCRETE_POWDER).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.CONCRETE_POWDER).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
+			Transmuting.add(20, new Component(Blocks.CONCRETE_POWDER).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.CONCRETE_POWDER).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.add(20, new Component(Blocks.CONCRETE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.CONCRETE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
+			Transmuting.add(21, new Component(Blocks.CONCRETE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.CONCRETE).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 		
 		for(int var = 0; var < 16; var++) {
-			Transmuting.add(21, new Component(Blocks.CARPET).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.CARPET).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
+			Transmuting.add(22, new Component(Blocks.CARPET).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(var)), new Component(Blocks.CARPET).addProperty(BlockColored.COLOR, EnumDyeColor.byMetadata((var == 15 ? 0 : var + 1))));
 		}
 	}
 }

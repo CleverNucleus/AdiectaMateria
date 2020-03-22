@@ -17,7 +17,8 @@ tile.flax.name=Flax Crop
 tile.bone_crop.name=Bone Crop
 tile.paperwall.name=Paper Wall
 tile.rice_block.name=Paper Woven Straw
-tile.mud_brick.name=Mud Brick
+tile.mud_brick_wet.name=Wet Mud Brick
+tile.mud_brick_dry.name=Dried Mud Brick
 
 itemGroup.adiectamateria=Adiecta Materia
 

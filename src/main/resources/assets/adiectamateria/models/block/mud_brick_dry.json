@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "adiectamateria:blocks/mud_brick"
+        "all": "adiectamateria:blocks/mud_brick_dry"
     }
 }
