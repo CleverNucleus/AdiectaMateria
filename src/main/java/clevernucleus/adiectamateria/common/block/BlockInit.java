@@ -21,6 +21,6 @@ public class BlockInit {
 	public static final Block RICE_BLOCK = new BlockDecorative("rice_block", Material.ROCK, SoundType.WOOD).setHardness(2.0F).setResistance(10.0F);
 	public static final Block SAND_LAMP = new BlockSandLamp("sandlamp").setHardness(1.5F).setResistance(10.0F).setLightLevel(1.0F);
 	public static final Block SAND_LAMP_BRICK = new BlockSandLamp("sandlamp_brick").setHardness(1.5F).setResistance(10.0F).setLightLevel(1.0F);
-	public static final Block MUD_BRICK_WET = new BlockDecorative("mud_brick_wet", Material.GROUND, SoundType.GROUND).setTickRandomly(true).setHardness(1.0F).setResistance(10.0F);
+	public static final Block MUD_BRICK_WET = new BlockDecorative("mud_brick_wet", Material.GROUND, SoundType.GROUND).setTickRandomly(true).setHardness(0.6F).setResistance(10.0F);
 	public static final Block MUD_BRICK_DRY = new BlockDecorative("mud_brick_dry", Material.ROCK, SoundType.GROUND).setHardness(2.0F).setResistance(10.0F);
 }
