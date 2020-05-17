@@ -22,6 +22,7 @@ public class Registry {
 	private static List<Item> items = new ArrayList<Item>();
 	private static List<Block> blocks = new ArrayList<Block>();
 	
+	public static final Block PADDY = register("paddy", new Block(Block.Properties.from(Blocks.DIRT)));
 	public static final Block RICE = register("rice", new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 	
 	private static Item register(final @Nonnull String par0, @Nonnull Item par1) {
