@@ -1,4 +1,4 @@
-package clevernucleus.adiectamateria.common.init.RiceCrop;
+package clevernucleus.adiectamateria.common.init.ricecrop;
 
 import java.util.Random;
 

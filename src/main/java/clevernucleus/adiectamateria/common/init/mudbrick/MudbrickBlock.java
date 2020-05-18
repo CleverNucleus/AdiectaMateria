@@ -1,4 +1,4 @@
-package clevernucleus.adiectamateria.common.init.MudBrick;
+package clevernucleus.adiectamateria.common.init.mudbrick;
 
 import java.util.Random;
 

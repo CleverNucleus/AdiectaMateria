@@ -4,5 +4,9 @@
 	"block.adiectamateria.dry_mudbrick": "Dry Mudbrick",
 	"block.adiectamateria.wet_mudbrick": "Wet Mudbrick",
 	"block.adiectamateria.paddy": "Paddy",
-	"block.adiectamateria.rice": "Rice"
+	"block.adiectamateria.rice": "Rice",
+	"block.adiectamateria.sandlamp": "Sandlamp",
+	"block.adiectamateria.sandlamp_brick": "Sandlamp Brick",
+	"block.adiectamateria.shoji_panel": "Shōji Panel",
+	"block.adiectamateria.fine_shoji_panel": "Fine Shōji Panel"
 }

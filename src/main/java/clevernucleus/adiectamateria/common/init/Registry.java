@@ -6,11 +6,15 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import clevernucleus.adiectamateria.common.AdiectaMateria;
-import clevernucleus.adiectamateria.common.init.MudBrick.MudbrickBlock;
-import clevernucleus.adiectamateria.common.init.RiceCrop.RiceCropBlock;
+import clevernucleus.adiectamateria.common.init.mudbrick.MudbrickBlock;
+import clevernucleus.adiectamateria.common.init.ricecrop.RiceCropBlock;
+import clevernucleus.adiectamateria.common.init.shoji.ShojiBlock;
 import clevernucleus.adiectamateria.common.util.Group;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -27,6 +31,10 @@ public class Registry {
 	public static final Block WET_MUDBRICK = register("wet_mudbrick", new MudbrickBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
 	public static final Block PADDY = register("paddy", new Block(Block.Properties.from(Blocks.DIRT)));
 	public static final Block RICE = register("rice", new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
+	public static final Block SANDLAMP = register("sandlamp", new Block(Block.Properties.create(Material.ROCK, MaterialColor.SAND).hardnessAndResistance(2.0F, 6.0F).sound(SoundType.STONE).lightValue(15)));
+	public static final Block SANDLAMP_BRICK = register("sandlamp_brick", new Block(Block.Properties.from(SANDLAMP)));
+	public static final Block SHOJI_PANEL = register("shoji_panel", new ShojiBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid().lightValue(13)));
+	public static final Block FINE_SHOJI_PANEL = register("fine_shoji_panel", new ShojiBlock(Block.Properties.from(SHOJI_PANEL)));
 	
 	private static Item register(final @Nonnull String par0, @Nonnull Item par1) {
 		par1.setRegistryName(new ResourceLocation(AdiectaMateria.MODID, par0));
