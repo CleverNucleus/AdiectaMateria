@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "AA",
+        "AA"
+    ],
+    "key": {
+        "A": {
+            "item": "minecraft:dirt"
+        }
+    },
+    "result": {
+        "item": "adiectamateria:wet_mudbrick",
+        "count": 4
+    }
+}

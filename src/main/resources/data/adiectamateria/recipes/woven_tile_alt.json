@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "AB",
+        "BA"
+    ],
+    "key": {
+        "A": {
+            "item": "minecraft:stick"
+        },
+        "B": {
+            "item": "adiectamateria:papery_sheet"
+        }
+    },
+    "result": {
+        "item": "adiectamateria:woven_tile",
+        "count": 1
+    }
+}

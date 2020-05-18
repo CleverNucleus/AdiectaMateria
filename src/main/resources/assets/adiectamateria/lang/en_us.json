@@ -1,6 +1,14 @@
 {
 	"itemGroup.adiectamateriatab": "Adiecta Materia",
 	"item.adiectamateria.rice": "Rice",
+	"item.adiectamateria.arrow_fletching": "Paper Fletching",
+	"item.adiectamateria.arrow_head": "Stone Arrow Head",
+	"item.adiectamateria.papery_sheet": "Papery Sheet",
+	"item.adiectamateria.cooked_rice": "Cooked Rice",
+	"item.adiectamateria.onigiri": "Onigiri",
+	"item.adiectamateria.sushi": "Sushi",
+	"item.adiectamateria.ryoba_saw": "Ryoba Saw",
+	"item.adiectamateria.grafter": "Grafter",
 	"block.adiectamateria.dry_mudbrick": "Dry Mudbrick",
 	"block.adiectamateria.wet_mudbrick": "Wet Mudbrick",
 	"block.adiectamateria.paddy": "Paddy",
@@ -8,5 +16,6 @@
 	"block.adiectamateria.sandlamp": "Sandlamp",
 	"block.adiectamateria.sandlamp_brick": "Sandlamp Brick",
 	"block.adiectamateria.shoji_panel": "Shōji Panel",
-	"block.adiectamateria.fine_shoji_panel": "Fine Shōji Panel"
+	"block.adiectamateria.fine_shoji_panel": "Fine Shōji Panel",
+	"block.adiectamateria.woven_tile": "Woven Tile"
 }

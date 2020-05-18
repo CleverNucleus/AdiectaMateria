@@ -1,0 +1,6 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "adiectamateria:items/ryoba_saw"
+	}
+}

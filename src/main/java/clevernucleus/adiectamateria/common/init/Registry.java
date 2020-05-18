@@ -6,8 +6,10 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import clevernucleus.adiectamateria.common.AdiectaMateria;
+import clevernucleus.adiectamateria.common.init.grafter.GrafterItem;
 import clevernucleus.adiectamateria.common.init.mudbrick.MudbrickBlock;
 import clevernucleus.adiectamateria.common.init.ricecrop.RiceCropBlock;
+import clevernucleus.adiectamateria.common.init.ryobasaw.RyobaSawItem;
 import clevernucleus.adiectamateria.common.init.shoji.ShojiBlock;
 import clevernucleus.adiectamateria.common.util.Group;
 import net.minecraft.block.Block;
@@ -16,6 +18,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -35,6 +38,16 @@ public class Registry {
 	public static final Block SANDLAMP_BRICK = register("sandlamp_brick", new Block(Block.Properties.from(SANDLAMP)));
 	public static final Block SHOJI_PANEL = register("shoji_panel", new ShojiBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid().lightValue(13)));
 	public static final Block FINE_SHOJI_PANEL = register("fine_shoji_panel", new ShojiBlock(Block.Properties.from(SHOJI_PANEL)));
+	public static final Block WOVEN_TILE = register("woven_tile", new Block(Block.Properties.from(Blocks.OAK_PLANKS)));
+	
+	public static final Item ARROW_FLETCHING = register("arrow_fletching", new Item(new Item.Properties().group(Group.INSTANCE)));
+	public static final Item ARROW_HEAD = register("arrow_head", new Item(new Item.Properties().group(Group.INSTANCE)));
+	public static final Item PAPERY_SHEET = register("papery_sheet", new Item(new Item.Properties().group(Group.INSTANCE)));
+	public static final Item COOKED_RICE = register("cooked_rice", new Item(new Item.Properties().food(new Food.Builder().hunger(1).saturation(0.1F).fastToEat().build()).group(Group.INSTANCE)));
+	public static final Item ONIGIRI = register("onigiri", new Item(new Item.Properties().food(new Food.Builder().hunger(9).saturation(1.0F).build()).group(Group.INSTANCE)));
+	public static final Item SUSHI = register("sushi", new Item(new Item.Properties().food(new Food.Builder().hunger(6).saturation(1.0F).fastToEat().build()).group(Group.INSTANCE)));
+	public static final Item RYOBA_SAW = register("ryoba_saw", new RyobaSawItem(new Item.Properties().group(Group.INSTANCE)));
+	public static final Item GRAFTER = register("grafter", new GrafterItem(new Item.Properties().group(Group.INSTANCE)));
 	
 	private static Item register(final @Nonnull String par0, @Nonnull Item par1) {
 		par1.setRegistryName(new ResourceLocation(AdiectaMateria.MODID, par0));

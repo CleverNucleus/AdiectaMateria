@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " A",
+        "B "
+    ],
+    "key": {
+        "A": {
+            "item": "minecraft:stick"
+        },
+        "B": {
+            "item": "adiectamateria:papery_sheet"
+        }
+    },
+    "result": {
+        "item": "adiectamateria:arrow_fletching",
+        "count": 1
+    }
+}

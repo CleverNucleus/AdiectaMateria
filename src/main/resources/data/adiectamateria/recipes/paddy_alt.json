@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "AB",
+        "BA"
+    ],
+    "key": {
+        "A": {
+            "item": "minecraft:clay_ball"
+        },
+        "B": {
+            "item": "minecraft:dirt"
+        }
+    },
+    "result": {
+        "item": "adiectamateria:paddy",
+        "count": 2
+    }
+}
