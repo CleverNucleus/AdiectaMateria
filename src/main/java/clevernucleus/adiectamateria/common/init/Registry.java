@@ -14,6 +14,7 @@ import clevernucleus.adiectamateria.common.init.shoji.ShojiBlock;
 import clevernucleus.adiectamateria.common.util.Group;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -72,6 +73,8 @@ public class Registry {
 		for(Item var : items) {
 			par0.getRegistry().register(var);
 		}
+		
+		ComposterBlock.CHANCES.put(RICE.asItem(), 0.3F);
 	}
 	
 	@SubscribeEvent
