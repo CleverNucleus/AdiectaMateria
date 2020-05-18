@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import clevernucleus.adiectamateria.common.AdiectaMateria;
+import clevernucleus.adiectamateria.common.init.MudBrick.MudbrickBlock;
 import clevernucleus.adiectamateria.common.init.RiceCrop.RiceCropBlock;
 import clevernucleus.adiectamateria.common.util.Group;
 import net.minecraft.block.Block;
@@ -22,6 +23,8 @@ public class Registry {
 	private static List<Item> items = new ArrayList<Item>();
 	private static List<Block> blocks = new ArrayList<Block>();
 	
+	public static final Block DRY_MUDBRICK = register("dry_mudbrick", new Block(Block.Properties.from(Blocks.COBBLESTONE)));
+	public static final Block WET_MUDBRICK = register("wet_mudbrick", new MudbrickBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
 	public static final Block PADDY = register("paddy", new Block(Block.Properties.from(Blocks.DIRT)));
 	public static final Block RICE = register("rice", new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 	

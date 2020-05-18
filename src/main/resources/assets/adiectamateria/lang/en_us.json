@@ -1,6 +1,8 @@
 {
 	"itemGroup.adiectamateriatab": "Adiecta Materia",
 	"item.adiectamateria.rice": "Rice",
-	"block.adiectamateria.rice": "Rice",
-	"block.adiectamateria.paddy": "Paddy"
+	"block.adiectamateria.dry_mudbrick": "Dry Mudbrick",
+	"block.adiectamateria.wet_mudbrick": "Wet Mudbrick",
+	"block.adiectamateria.paddy": "Paddy",
+	"block.adiectamateria.rice": "Rice"
 }

@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"age=0": { "model": "adiectamateria:block/wet_mudbrick_0" },
+		"age=1": { "model": "adiectamateria:block/wet_mudbrick_1" },
+		"age=2": { "model": "adiectamateria:block/wet_mudbrick_2" },
+		"age=3": { "model": "adiectamateria:block/wet_mudbrick_3" }
+	}
+}
