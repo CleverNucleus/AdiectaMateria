@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import clevernucleus.adiectamateria.common.AdiectaMateria;
+import clevernucleus.adiectamateria.common.init.endercrate.*;
 import clevernucleus.adiectamateria.common.init.grafter.GrafterItem;
 import clevernucleus.adiectamateria.common.init.mudbrick.MudbrickBlock;
 import clevernucleus.adiectamateria.common.init.ricecrop.RiceCropBlock;
@@ -21,6 +22,8 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,6 +33,7 @@ import net.minecraftforge.fml.common.Mod;
 public class Registry {
 	private static List<Item> items = new ArrayList<Item>();
 	private static List<Block> blocks = new ArrayList<Block>();
+	private static List<TileEntityType<?>> tileEntityTypes = new ArrayList<TileEntityType<?>>();
 	
 	public static final Block DRY_MUDBRICK = register("dry_mudbrick", new Block(Block.Properties.from(Blocks.COBBLESTONE)));
 	public static final Block WET_MUDBRICK = register("wet_mudbrick", new MudbrickBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
@@ -40,6 +44,9 @@ public class Registry {
 	public static final Block SHOJI_PANEL = register("shoji_panel", new ShojiBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid().lightValue(13)));
 	public static final Block FINE_SHOJI_PANEL = register("fine_shoji_panel", new ShojiBlock(Block.Properties.from(SHOJI_PANEL)));
 	public static final Block WOVEN_TILE = register("woven_tile", new Block(Block.Properties.from(Blocks.OAK_PLANKS)));
+	public static final Block ENDER_CRATE = register("ender_crate", new EnderCrateBlock(Block.Properties.create(Material.ROCK, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F, 6.0F).sound(SoundType.STONE)));
+	
+	public static final TileEntityType<EnderCrateTileEntity> ENDER_CRATE_TILE_ENTITY = register("ender_crate", TileEntityType.Builder.create(EnderCrateTileEntity::new, ENDER_CRATE).build(null));
 	
 	public static final Item ARROW_FLETCHING = register("arrow_fletching", new Item(new Item.Properties().group(Group.INSTANCE)));
 	public static final Item ARROW_HEAD = register("arrow_head", new Item(new Item.Properties().group(Group.INSTANCE)));
@@ -68,6 +75,14 @@ public class Registry {
 		return par1;
 	}
 	
+	private static <T extends TileEntity> TileEntityType<T> register(final @Nonnull String par0, TileEntityType<T> par1) {
+		par1.setRegistryName(new ResourceLocation(AdiectaMateria.MODID, par0));
+		
+		tileEntityTypes.add(par1);
+		
+		return par1;
+	}
+	
 	@SubscribeEvent
 	public static void registerItems(final RegistryEvent.Register<Item> par0) {
 		for(Item var : items) {
@@ -80,6 +95,13 @@ public class Registry {
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> par0) {
 		for(Block var : blocks) {
+			par0.getRegistry().register(var);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void registerTileEntityTypes(final RegistryEvent.Register<TileEntityType<?>> par0) {
+		for(TileEntityType<?> var : tileEntityTypes) {
 			par0.getRegistry().register(var);
 		}
 	}

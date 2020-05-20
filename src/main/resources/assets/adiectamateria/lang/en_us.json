@@ -1,4 +1,5 @@
 {
+	"text.slots": " Slots",
 	"itemGroup.adiectamateriatab": "Adiecta Materia",
 	"item.adiectamateria.rice": "Rice",
 	"item.adiectamateria.arrow_fletching": "Paper Fletching",
@@ -17,5 +18,6 @@
 	"block.adiectamateria.sandlamp_brick": "Sandlamp Brick",
 	"block.adiectamateria.shoji_panel": "Shōji Panel",
 	"block.adiectamateria.fine_shoji_panel": "Fine Shōji Panel",
-	"block.adiectamateria.woven_tile": "Woven Tile"
+	"block.adiectamateria.woven_tile": "Woven Tile",
+	"block.adiectamateria.ender_crate": "Ender Crate"
 }

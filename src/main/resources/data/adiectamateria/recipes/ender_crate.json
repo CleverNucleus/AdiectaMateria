@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "ABA",
+        "BCB",
+        "ABA"
+    ],
+    "key": {
+        "A": {
+            "tag": "minecraft:planks"
+        },
+        "B": {
+            "item": "minecraft:ender_chest"
+        },
+        "C": {
+            "item": "minecraft:diamond"
+        }
+    },
+    "result": {
+        "item": "adiectamateria:ender_crate",
+        "count": 1
+    }
+}
