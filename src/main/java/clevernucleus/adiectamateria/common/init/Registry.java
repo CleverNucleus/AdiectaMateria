@@ -89,7 +89,7 @@ public class Registry {
 			par0.getRegistry().register(var);
 		}
 		
-		ComposterBlock.CHANCES.put(RICE.asItem(), 0.3F);
+		ComposterBlock.CHANCES.put(RICE, 0.3F);
 	}
 	
 	@SubscribeEvent

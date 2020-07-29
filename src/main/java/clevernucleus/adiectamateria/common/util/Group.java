@@ -1,8 +1,8 @@
 package clevernucleus.adiectamateria.common.util;
 
+import clevernucleus.adiectamateria.common.init.Registry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 
 public class Group extends ItemGroup {
 	public static final Group INSTANCE = new Group(ItemGroup.GROUPS.length, "adiectamateriatab");
@@ -13,6 +13,6 @@ public class Group extends ItemGroup {
 	
 	@Override
 	public ItemStack createIcon() {
-		return new ItemStack(Items.SUGAR);
+		return new ItemStack(Registry.GRAFTER);
 	}
 }

@@ -1,5 +1,5 @@
 {
-	"text.slots": " Slots",
+	"tooltip.slots": "%s%s/%s Slots",
 	"itemGroup.adiectamateriatab": "Adiecta Materia",
 	"item.adiectamateria.rice": "Rice",
 	"item.adiectamateria.arrow_fletching": "Paper Fletching",
