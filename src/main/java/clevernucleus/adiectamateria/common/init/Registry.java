@@ -13,6 +13,7 @@ import clevernucleus.adiectamateria.common.init.ricecrop.RiceCropBlock;
 import clevernucleus.adiectamateria.common.init.ryobasaw.RyobaSawItem;
 import clevernucleus.adiectamateria.common.init.shoji.ShojiBlock;
 import clevernucleus.adiectamateria.common.util.Group;
+import clevernucleus.adiectamateria.common.world.OreGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
@@ -28,6 +29,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 @Mod.EventBusSubscriber(modid = AdiectaMateria.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Registry {
@@ -106,5 +108,10 @@ public class Registry {
 		for(TileEntityType<?> var : tileEntityTypes) {
 			par0.getRegistry().register(var);
 		}
+	}
+	
+	@SubscribeEvent
+	public static void registerOnLoad(final FMLLoadCompleteEvent par0) {
+		OreGenerator.generate();
 	}
 }
