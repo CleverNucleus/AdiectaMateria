@@ -10,7 +10,7 @@
 	"item.adiectamateria.sushi": "Sushi",
 	"item.adiectamateria.ryoba_saw": "Ryoba Saw",
 	"item.adiectamateria.grafter": "Grafter",
-	"item.adiectamateria.salt": "Salt",
+	"item.adiectamateria.saltpeter": "Saltpeter",
 	"block.adiectamateria.dry_mudbrick": "Dry Mudbrick",
 	"block.adiectamateria.wet_mudbrick": "Wet Mudbrick",
 	"block.adiectamateria.paddy": "Paddy",
@@ -21,5 +21,5 @@
 	"block.adiectamateria.fine_shoji_panel": "Fine Shōji Panel",
 	"block.adiectamateria.woven_tile": "Woven Tile",
 	"block.adiectamateria.ender_crate": "Ender Crate",
-	"block.adiectamateria.salt_ore": "Salt"
+	"block.adiectamateria.saltpeter_ore": "Saltpeter"
 }

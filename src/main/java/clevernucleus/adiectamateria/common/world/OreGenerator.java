@@ -31,11 +31,11 @@ public class OreGenerator {
 	});
 	
 	public static void generate() {
-		for (Biome var : ForgeRegistries.BIOMES) {
-			if (SALT_BIOMES.contains(var)) {
+		for(Biome var : ForgeRegistries.BIOMES) {
+			if(SALT_BIOMES.contains(var)) {
 				ConfiguredPlacement<CountRangeConfig> var0 = Placement.COUNT_RANGE.configure(new CountRangeConfig(17, 5, 5, 60));
 				
-				var.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Registry.SALT_ORE.getDefaultState(), 10)).withPlacement(var0));
+				var.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Registry.SALTPETER_ORE.getDefaultState(), 10)).withPlacement(var0));
 			}
 		}
 	}

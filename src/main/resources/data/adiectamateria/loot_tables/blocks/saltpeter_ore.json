@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "adiectamateria:salt_ore"
+              "name": "adiectamateria:saltpeter_ore"
             },
             {
               "type": "minecraft:item",
@@ -49,7 +49,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "adiectamateria:salt"
+              "name": "adiectamateria:saltpeter"
             }
           ]
         }

@@ -47,7 +47,7 @@ public class Registry {
 	public static final Block FINE_SHOJI_PANEL = register("fine_shoji_panel", new ShojiBlock(Block.Properties.from(SHOJI_PANEL)));
 	public static final Block WOVEN_TILE = register("woven_tile", new Block(Block.Properties.from(Blocks.OAK_PLANKS)));
 	public static final Block ENDER_CRATE = register("ender_crate", new EnderCrateBlock(Block.Properties.create(Material.ROCK, MaterialColor.OBSIDIAN).hardnessAndResistance(2.0F, 6.0F).sound(SoundType.STONE)));
-	public static final Block SALT_ORE = register("salt_ore", new Block(Block.Properties.from(Blocks.IRON_ORE)));
+	public static final Block SALTPETER_ORE = register("saltpeter_ore", new Block(Block.Properties.from(Blocks.IRON_ORE)));
 	
 	public static final TileEntityType<EnderCrateTileEntity> ENDER_CRATE_TILE_ENTITY = register("ender_crate", TileEntityType.Builder.create(EnderCrateTileEntity::new, ENDER_CRATE).build(null));
 	
@@ -59,7 +59,7 @@ public class Registry {
 	public static final Item SUSHI = register("sushi", new Item(new Item.Properties().food(new Food.Builder().hunger(6).saturation(1.0F).fastToEat().build()).group(Group.INSTANCE)));
 	public static final Item RYOBA_SAW = register("ryoba_saw", new RyobaSawItem(new Item.Properties().group(Group.INSTANCE)));
 	public static final Item GRAFTER = register("grafter", new GrafterItem(new Item.Properties().group(Group.INSTANCE)));
-	public static final Item SALT = register("salt", new Item(new Item.Properties().group(Group.INSTANCE)));
+	public static final Item SALTPETER = register("saltpeter", new Item(new Item.Properties().group(Group.INSTANCE)));
 	
 	private static Item register(final @Nonnull String par0, @Nonnull Item par1) {
 		par1.setRegistryName(new ResourceLocation(AdiectaMateria.MODID, par0));
