@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  A",
+    " B ",
+    "C  "
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:stick"
+    },
+    "B": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "adiectamateria:spindle",
+    "count": 1
+  }
+}

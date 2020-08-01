@@ -35,19 +35,19 @@ public class RyobaSawItem extends AxeItem {
 		Block var2 = var0.getBlockState(var1).getBlock();
 		
 		if(var2 == Registry.WOVEN_TILE) {
+			if(var0.isRemote) return ActionResultType.PASS;
+			
 			PlayerEntity var3 = par0.getPlayer();
 			Item var4 = (var3.isCrouching() ? Registry.FINE_SHOJI_PANEL.asItem() : Registry.SHOJI_PANEL.asItem());
 			
 			if(var3 != null) {
-				if(!var0.isRemote) {
-					cutBlock(var0, var1, var4);
-					
-					par0.getItem().damageItem(1, var3, var -> {
-						var.sendBreakAnimation(par0.getHand());
-					});
-				}
+				this.cutBlock(var0, var1, var4);
 				
-				var0.playSound(var3, var1, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				par0.getItem().damageItem(1, var3, var -> {
+					var.sendBreakAnimation(par0.getHand());
+				});
+				
+				var0.playSound((PlayerEntity)null, var1, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 			
 			return ActionResultType.SUCCESS;

@@ -1,6 +1,7 @@
 package clevernucleus.adiectamateria.common.init.grafter;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 import com.google.common.collect.Multimap;
 
@@ -25,8 +26,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class GrafterItem extends TieredItem {
-	private static final Block[] EFFECTIVE_ON = new Block[] {Blocks.GRASS, Blocks.TALL_GRASS};
-	private static final IItemProvider[] DROPS = new IItemProvider[] {Registry.RICE};
+	private static final Collection<Block> EFFECTIVE_ON = Arrays.asList(Blocks.GRASS, Blocks.TALL_GRASS);
+	private static final IItemProvider[] DROPS = new IItemProvider[] {Registry.RICE, Registry.PLANT_FIBRE};
 	
 	public GrafterItem(Properties par0) {
 		super(ItemTier.GOLD, par0);
@@ -35,7 +36,7 @@ public class GrafterItem extends TieredItem {
 	private void cutBlock(World par0, BlockPos par1) {
 		par0.setBlockState(par1, Blocks.AIR.getDefaultState(), 11);
 		
-		if(random.nextInt(100) < 20) {
+		if(random.nextInt(100) < 30) {
 			ItemEntity var0 = new ItemEntity(par0, par1.getX(), par1.getY(), par1.getZ(), new ItemStack(DROPS[random.nextInt(DROPS.length)].asItem(), 1));
 			
 			par0.addEntity(var0);
@@ -48,19 +49,19 @@ public class GrafterItem extends TieredItem {
 		BlockPos var1 = par0.getPos();
 		Block var2 = var0.getBlockState(var1).getBlock();
 		
-		if(Arrays.asList(EFFECTIVE_ON).contains(var2)) {
-			PlayerEntity var3 = par0.getPlayer();
-			
-			if(var3 != null) {
-				if(!var0.isRemote) {
-					cutBlock(var0, var1);
-					
-					par0.getItem().damageItem(1, var3, var -> {
-						var.sendBreakAnimation(par0.getHand());
-					});
-				}
+		if(EFFECTIVE_ON.contains(var2)) {
+			if(!var0.isRemote) {
+				PlayerEntity var3 = par0.getPlayer();
 				
-				var0.playSound(var3, var1, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				if(var3 == null) return ActionResultType.PASS;
+				
+				this.cutBlock(var0, var1);
+				
+				par0.getItem().damageItem(1, var3, var -> {
+					var.sendBreakAnimation(par0.getHand());
+				});
+				
+				var0.playSound((PlayerEntity)null, var1, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 			
 			return ActionResultType.SUCCESS;
