@@ -17,6 +17,7 @@ public class RegistryEvents {
 	@SubscribeEvent
 	public static void onClientLoad(final FMLClientSetupEvent par0) {
 		RenderTypeLookup.setRenderLayer(Registry.RICE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(Registry.ENDER_BERRY, RenderType.getCutout());
 		Registry.SPINDLE.addPropertyOverride(new ResourceLocation(AdiectaMateria.MODID, "full"), (var0, var1, var2) -> ((SpindleItem)var0.getItem()).isFull(var0) ? 1.0F : 0.0F);
 	}
 }

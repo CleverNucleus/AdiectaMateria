@@ -13,6 +13,6 @@ public class Group extends ItemGroup {
 	
 	@Override
 	public ItemStack createIcon() {
-		return new ItemStack(Registry.GRAFTER);
+		return new ItemStack(Registry.SALTPETER);
 	}
 }

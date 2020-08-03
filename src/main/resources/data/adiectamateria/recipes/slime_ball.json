@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+		{
+			"item": "minecraft:snowball"
+		},
+        {
+            "item": "minecraft:green_dye"
+        },
+		{
+			"tag": "forge:dusts/saltpeter"
+		},
+		{
+			"tag": "forge:dusts/saltpeter"
+		}
+    ],
+    "result": {
+        "item": "minecraft:slime_ball",
+        "count": 2
+    }
+}
