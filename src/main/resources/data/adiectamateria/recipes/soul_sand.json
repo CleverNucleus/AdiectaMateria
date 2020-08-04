@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:sand"
+    },
+    "B": {
+      "item": "adiectamateria:soul"
+    }
+  },
+  "result": {
+    "item": "minecraft:soul_sand",
+    "count": 8
+  }
+}
