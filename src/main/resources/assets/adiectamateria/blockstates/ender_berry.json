@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"age=0": { "model": "adiectamateria:block/ender_berry" },
-		"age=1": { "model": "adiectamateria:block/ender_berry_ripe" }
-	}
-}

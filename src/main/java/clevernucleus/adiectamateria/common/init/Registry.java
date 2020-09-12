@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import clevernucleus.adiectamateria.common.AdiectaMateria;
-import clevernucleus.adiectamateria.common.init.enderbush.EnderBerry;
 import clevernucleus.adiectamateria.common.init.grafter.GrafterItem;
 import clevernucleus.adiectamateria.common.init.mudbrick.MudbrickBlock;
 import clevernucleus.adiectamateria.common.init.ricecrop.RiceCropBlock;
@@ -43,7 +42,6 @@ public class Registry {
 	public static final Block SHOJI_PANEL = register("shoji_panel", new ShojiBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid().lightValue(13)));
 	public static final Block FINE_SHOJI_PANEL = register("fine_shoji_panel", new ShojiBlock(Block.Properties.from(SHOJI_PANEL)));
 	public static final Block RICE = register("rice", new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
-	public static final Block ENDER_BERRY = register("ender_berry", new EnderBerry(Block.Properties.from(Blocks.WHEAT)));
 	
 	public static final Item SOUL = register("soul", new Item(new Item.Properties().group(Group.INSTANCE)));
 	public static final Item SALTPETER = register("saltpeter", new Item(new Item.Properties().group(Group.INSTANCE)));

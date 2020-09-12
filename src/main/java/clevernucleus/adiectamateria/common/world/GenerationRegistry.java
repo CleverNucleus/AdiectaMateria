@@ -2,19 +2,15 @@ package clevernucleus.adiectamateria.common.world;
 
 import java.util.Collection;
 
-import com.google.common.collect.ImmutableSet;
-
 import clevernucleus.adiectamateria.common.AdiectaMateria;
 import clevernucleus.adiectamateria.common.init.Registry;
+import clevernucleus.adiectamateria.common.util.ConfigSetting;
 import clevernucleus.adiectamateria.common.util.Dual;
 import clevernucleus.adiectamateria.common.util.Util;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage.Decoration;
-import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
-import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
@@ -50,22 +46,27 @@ public class GenerationRegistry {
 		return Dual.make(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(var1).withPlacement(var0));
 	});
 	
-	private static final Dual<Decoration, ConfiguredFeature<?, ?>> BUSH_GEN = Dual.get(() -> {
-		SimpleBlockStateProvider var0 = new SimpleBlockStateProvider(Registry.ENDER_BERRY.getDefaultState());
-		BlockClusterFeatureConfig.Builder var1 = new BlockClusterFeatureConfig.Builder(var0, new SimpleBlockPlacer()).tries(1).whitelist(ImmutableSet.of(Blocks.STONE));
-		ConfiguredPlacement<CountRangeConfig> var2 = Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 5, 5, 40));
+	private static final Dual<Decoration, ConfiguredFeature<?, ?>> ENDSTONE_GEN = Dual.get(() -> {
+		ConfiguredPlacement<CountRangeConfig> var0 = Placement.COUNT_RANGE.configure(new CountRangeConfig(17, 5, 5, 60));
+		OreFeatureConfig var1 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Blocks.END_STONE.getDefaultState(), 10);
 		
-		return Dual.make(Decoration.UNDERGROUND_DECORATION, Feature.FLOWER.withConfiguration(var1.func_227317_b_().build()).withPlacement(var2));
+		return Dual.make(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(var1).withPlacement(var0));
 	});
 	
 	@SubscribeEvent
 	public static void registerAfterLoad(final FMLLoadCompleteEvent par0) {
-		for(Biome var : ForgeRegistries.BIOMES) {
-			if(SALT_BIOMES.contains(var)) {
-				var.addFeature(SALT_GEN.a(), SALT_GEN.b());
+		if(ConfigSetting.CONFIG.genSaltpeter.get()) {
+			for(Biome var : ForgeRegistries.BIOMES) {
+				if(SALT_BIOMES.contains(var)) {
+					var.addFeature(SALT_GEN.a(), SALT_GEN.b());
+				}
 			}
-			
-			var.addFeature(BUSH_GEN.a(), BUSH_GEN.b());
+		}
+		
+		if(ConfigSetting.CONFIG.genEndstone.get()) {
+			for(Biome var : ForgeRegistries.BIOMES) {
+				var.addFeature(ENDSTONE_GEN.a(), ENDSTONE_GEN.b());
+			}
 		}
 	}
 }

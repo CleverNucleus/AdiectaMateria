@@ -1,9 +1,8 @@
 {
-	"tooltip.slots": "%s%s/%s Slots",
+	"config.saltpeter": "Note: If set to false, there is no other method of obtaining Saltpeter.",
 	"itemGroup.adiectamateriatab": "Adiecta Materia",
 	"item.adiectamateria.soul": "Soul",
 	"item.adiectamateria.rice": "Rice",
-	"item.adiectamateria.ender_berry": "Ender Berry",
 	"item.adiectamateria.arrow_fletching": "Paper Fletching",
 	"item.adiectamateria.arrow_head": "Stone Arrow Head",
 	"item.adiectamateria.papery_sheet": "Papery Sheet",
@@ -19,7 +18,6 @@
 	"block.adiectamateria.wet_mudbrick": "Wet Mudbrick",
 	"block.adiectamateria.paddy": "Paddy",
 	"block.adiectamateria.rice": "Rice",
-	"block.adiectamateria.ender_berry": "Ender Berry",
 	"block.adiectamateria.sandlamp": "Sandlamp",
 	"block.adiectamateria.sandlamp_brick": "Sandlamp Brick",
 	"block.adiectamateria.shoji_panel": "Shōji Panel",
