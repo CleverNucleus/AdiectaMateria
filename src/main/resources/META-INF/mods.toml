@@ -3,7 +3,7 @@ loaderVersion="[31,)"
 
 [[mods]]
 modId="adiectamateria"
-version="2.3.2"
+version="2.3.3"
 displayName="AdiectaMateria"
 displayURL="https://github.com/CleverNucleus/AdiectaMateria"
 logoFile="logo.png"
