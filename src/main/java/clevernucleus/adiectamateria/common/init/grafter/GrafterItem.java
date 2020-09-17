@@ -3,17 +3,14 @@ package clevernucleus.adiectamateria.common.init.grafter;
 import java.util.Arrays;
 import java.util.Collection;
 
-import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.ImmutableMultimap.Builder;
 
 import clevernucleus.adiectamateria.common.init.Registry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -31,17 +28,9 @@ import net.minecraft.world.World;
 public class GrafterItem extends TieredItem {
 	private static final Collection<Block> EFFECTIVE_ON = Arrays.asList(Blocks.GRASS, Blocks.TALL_GRASS);
 	private static final IItemProvider[] DROPS = new IItemProvider[] {Registry.RICE, Registry.PLANT_FIBRE};
-	private final Multimap<Attribute, AttributeModifier> attributes;
 	
 	public GrafterItem(Properties par0) {
 		super(ItemTier.GOLD, par0);
-		
-		Builder<Attribute, AttributeModifier> var0 = ImmutableMultimap.builder();
-		
-		var0.put(Attributes.field_233823_f_, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0D, AttributeModifier.Operation.ADDITION));
-		var0.put(Attributes.field_233825_h_, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.0D, AttributeModifier.Operation.ADDITION));
-	    
-		this.attributes = var0.build();
 	}
 	
 	private void cutBlock(World par0, BlockPos par1) {
@@ -91,7 +80,14 @@ public class GrafterItem extends TieredItem {
 	}
 	
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType par0, ItemStack par1) {
-		return par0 == EquipmentSlotType.MAINHAND ? this.attributes : super.getAttributeModifiers(par0, par1);
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType par0, ItemStack par1) {
+		Multimap<String, AttributeModifier> var0 = super.getAttributeModifiers(par0, par1);
+		
+		if(par0 == EquipmentSlotType.MAINHAND) {
+			var0.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0D, AttributeModifier.Operation.ADDITION));
+			var0.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.0D, AttributeModifier.Operation.ADDITION));
+		}
+		
+		return var0;
 	}
 }

@@ -1,6 +1,5 @@
 modLoader="javafml"
-loaderVersion="[33,)"
-license="Apache License 2.0"
+loaderVersion="[31,)"
 
 [[mods]]
 modId="adiectamateria"
@@ -12,19 +11,19 @@ credits="CleverNucleus"
 authors="CleverNucleus"
 
 description='''
-Stepping stone utility mod; lets the player make things differently.
+A stepping stone vanilla+ mod.
 '''
 
 [[dependencies.adiectamateria]]
     modId="forge"
     mandatory=true
-    versionRange="[33,)"
+    versionRange="[31,)"
     ordering="NONE"
     side="BOTH"
-	
+
 [[dependencies.adiectamateria]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.2]"
+    versionRange="[1.15.2]"
     ordering="NONE"
     side="BOTH"
