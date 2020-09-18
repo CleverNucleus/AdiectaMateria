@@ -30,7 +30,7 @@ public class RiceCropBlock extends CropsBlock implements IWaterLoggable {
 	public RiceCropBlock(Properties par0) {
 		super(par0);
 		
-		this.setDefaultState(this.stateContainer.getBaseState().with(this.getAgeProperty(), Integer.valueOf(0)).with(WATERLOGGED, Boolean.valueOf(false)));
+		this.setDefaultState(this.stateContainer.getBaseState().with(this.getAgeProperty(), Integer.valueOf(0)).with(WATERLOGGED, Boolean.valueOf(true)));
 	}
 	
 	@Override
