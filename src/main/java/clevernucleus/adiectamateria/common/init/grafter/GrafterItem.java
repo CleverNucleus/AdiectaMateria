@@ -9,8 +9,9 @@ import clevernucleus.adiectamateria.common.init.Registry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -80,12 +81,12 @@ public class GrafterItem extends TieredItem {
 	}
 	
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType par0, ItemStack par1) {
-		Multimap<String, AttributeModifier> var0 = super.getAttributeModifiers(par0, par1);
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType par0, ItemStack par1) {
+		Multimap<Attribute, AttributeModifier> var0 = super.getAttributeModifiers(par0, par1);
 		
 		if(par0 == EquipmentSlotType.MAINHAND) {
-			var0.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0D, AttributeModifier.Operation.ADDITION));
-			var0.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.0D, AttributeModifier.Operation.ADDITION));
+			var0.put(Attributes.field_233823_f_, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0D, AttributeModifier.Operation.ADDITION));
+			var0.put(Attributes.field_233825_h_, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.0D, AttributeModifier.Operation.ADDITION));
 		}
 		
 		return var0;

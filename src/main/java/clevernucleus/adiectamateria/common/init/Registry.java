@@ -36,10 +36,14 @@ public class Registry {
 	public static final Block DRY_MUDBRICK = register("dry_mudbrick", new Block(Block.Properties.from(Blocks.COBBLESTONE)));
 	public static final Block WET_MUDBRICK = register("wet_mudbrick", new MudbrickBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
 	public static final Block PADDY = register("paddy", new Block(Block.Properties.from(Blocks.DIRT)));
-	public static final Block SANDLAMP = register("sandlamp", new Block(Block.Properties.create(Material.ROCK, MaterialColor.SAND).hardnessAndResistance(2.0F, 6.0F).sound(SoundType.STONE).lightValue(15)));
+	public static final Block SANDLAMP = register("sandlamp", new Block(Block.Properties.create(Material.ROCK, MaterialColor.SAND).hardnessAndResistance(2.0F, 6.0F).sound(SoundType.STONE).func_235838_a_(var -> {
+		return 15;
+	})));
 	public static final Block SANDLAMP_BRICK = register("sandlamp_brick", new Block(Block.Properties.from(SANDLAMP)));
 	public static final Block WOVEN_TILE = register("woven_tile", new Block(Block.Properties.from(Blocks.OAK_PLANKS)));
-	public static final Block SHOJI_PANEL = register("shoji_panel", new ShojiBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid().lightValue(13)));
+	public static final Block SHOJI_PANEL = register("shoji_panel", new ShojiBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid().func_235838_a_(var -> {
+		return 15;
+	})));
 	public static final Block FINE_SHOJI_PANEL = register("fine_shoji_panel", new ShojiBlock(Block.Properties.from(SHOJI_PANEL)));
 	public static final Block RICE = register("rice", new RiceCropBlock(Block.Properties.from(Blocks.WHEAT)));
 	

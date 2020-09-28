@@ -9,7 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -54,7 +54,7 @@ public class RiceCropBlock extends CropsBlock implements IWaterLoggable {
 	public void tick(BlockState par0, ServerWorld par1, BlockPos par2, Random par3) {
 		if(!par1.isAreaLoaded(par2, 1)) return;
 		
-		IFluidState var0 = par1.getFluidState(par2);
+		FluidState var0 = par1.getFluidState(par2);
 		
 		if(par1.getLightSubtracted(par2, 0) >= 9) {
 			int var1 = this.getAge(par0);
@@ -72,7 +72,7 @@ public class RiceCropBlock extends CropsBlock implements IWaterLoggable {
 	
 	@Override
 	public void grow(World par0, BlockPos par1, BlockState par2) {
-		IFluidState var0 = par0.getFluidState(par1);
+		FluidState var0 = par0.getFluidState(par1);
 		
 		int var1 = this.getAge(par2) + this.getBonemealAgeIncrease(par0);
 	    int var2 = this.getMaxAge();
@@ -86,13 +86,13 @@ public class RiceCropBlock extends CropsBlock implements IWaterLoggable {
 	
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext par0) {
-		IFluidState var0 = par0.getWorld().getFluidState(par0.getPos());
+		FluidState var0 = par0.getWorld().getFluidState(par0.getPos());
 		
 		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(var0.getFluid() == Fluids.WATER));
 	}
 	
 	@Override
-	public IFluidState getFluidState(BlockState par0) {
+	public FluidState getFluidState(BlockState par0) {
 		return par0.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
 	}
 	
