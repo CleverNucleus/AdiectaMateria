@@ -8,65 +8,61 @@ import clevernucleus.adiectamateria.common.util.ConfigSetting;
 import clevernucleus.adiectamateria.common.util.Dual;
 import clevernucleus.adiectamateria.common.util.Util;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.placement.ConfiguredPlacement;
-import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.placement.TopSolidRangeConfig;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = AdiectaMateria.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = AdiectaMateria.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class GenerationRegistry {
-	private static final Collection<Biome> SALT_BIOMES = Util.set(var -> {
-		var.add(Biomes.COLD_OCEAN);
-		var.add(Biomes.DEEP_COLD_OCEAN);
-		var.add(Biomes.DEEP_FROZEN_OCEAN);
-		var.add(Biomes.DEEP_LUKEWARM_OCEAN);
-		var.add(Biomes.DEEP_OCEAN);
-		var.add(Biomes.DEEP_WARM_OCEAN);
-		var.add(Biomes.DESERT);
-		var.add(Biomes.DESERT_HILLS);
-		var.add(Biomes.FROZEN_OCEAN);
-		var.add(Biomes.LUKEWARM_OCEAN);
-		var.add(Biomes.OCEAN);
-		var.add(Biomes.WARM_OCEAN);
+	private static final Collection<ResourceLocation> SALT_BIOMES = Util.set(var -> {
+		var.add(new ResourceLocation("ocean"));
+		var.add(new ResourceLocation("deep_cold_ocean"));
+		var.add(new ResourceLocation("deep_frozen_ocean"));
+		var.add(new ResourceLocation("deep_lukewarm_ocean"));
+		var.add(new ResourceLocation("deep_ocean"));
+		var.add(new ResourceLocation("deep_warm_ocean"));
+		var.add(new ResourceLocation("desert"));
+		var.add(new ResourceLocation("desert_hills"));
+		var.add(new ResourceLocation("frozen_ocean"));
+		var.add(new ResourceLocation("lukewarm_ocean"));
+		var.add(new ResourceLocation("ocean"));
+		var.add(new ResourceLocation("warm_ocean"));
 	});
 	
 	private static final Dual<Decoration, ConfiguredFeature<?, ?>> SALT_GEN = Dual.get(() -> {
-		ConfiguredPlacement<CountRangeConfig> var0 = Placement.COUNT_RANGE.configure(new CountRangeConfig(17, 5, 5, 60));
-		OreFeatureConfig var1 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Registry.SALTPETER_ORE.getDefaultState(), 15);
+		OreFeatureConfig var0 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.field_241882_a, Registry.SALTPETER_ORE.getDefaultState(), 15);
+		TopSolidRangeConfig var1 = new TopSolidRangeConfig(5, 0, 55);
+		ConfiguredFeature<?, ?> var2 = Feature.ORE.withConfiguration(var0).withPlacement(Placement.field_242907_l.configure(var1)).func_242728_a().func_242731_b(15);
 		
-		return Dual.make(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(var1).withPlacement(var0));
+		return Dual.make(Decoration.UNDERGROUND_ORES, var2);
 	});
 	
 	private static final Dual<Decoration, ConfiguredFeature<?, ?>> ENDSTONE_GEN = Dual.get(() -> {
-		ConfiguredPlacement<CountRangeConfig> var0 = Placement.COUNT_RANGE.configure(new CountRangeConfig(17, 5, 5, 60));
-		OreFeatureConfig var1 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Blocks.END_STONE.getDefaultState(), 10);
+		OreFeatureConfig var0 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.field_241882_a, Blocks.END_STONE.getDefaultState(), 10);
+		TopSolidRangeConfig var1 = new TopSolidRangeConfig(1, 0, 25);
+		ConfiguredFeature<?, ?> var2 = Feature.ORE.withConfiguration(var0).withPlacement(Placement.field_242907_l.configure(var1)).func_242728_a().func_242731_b(10);
 		
-		return Dual.make(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(var1).withPlacement(var0));
+		return Dual.make(Decoration.UNDERGROUND_ORES, var2);
 	});
 	
-	@SubscribeEvent
-	public static void registerAfterLoad(final FMLLoadCompleteEvent par0) {
+	@SubscribeEvent(priority = EventPriority.HIGH)
+	public static void registerBiomeFeatures(final BiomeLoadingEvent par0) {
 		if(ConfigSetting.CONFIG.genSaltpeter.get()) {
-			for(Biome var : ForgeRegistries.BIOMES) {
-				if(SALT_BIOMES.contains(var)) {
-					var.addFeature(SALT_GEN.a(), SALT_GEN.b());
-				}
+			if(SALT_BIOMES.contains(par0.getName())) {
+				par0.getGeneration().getFeatures(SALT_GEN.a()).add(() -> SALT_GEN.b());
 			}
 		}
 		
 		if(ConfigSetting.CONFIG.genEndstone.get()) {
-			for(Biome var : ForgeRegistries.BIOMES) {
-				var.addFeature(ENDSTONE_GEN.a(), ENDSTONE_GEN.b());
-			}
+			par0.getGeneration().getFeatures(ENDSTONE_GEN.a()).add(() -> ENDSTONE_GEN.b());
 		}
 	}
 }

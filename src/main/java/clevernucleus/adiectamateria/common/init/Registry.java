@@ -16,6 +16,7 @@ import clevernucleus.adiectamateria.common.util.Group;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.OreBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -32,7 +33,7 @@ public class Registry {
 	private static List<Item> items = new ArrayList<Item>();
 	private static List<Block> blocks = new ArrayList<Block>();
 	
-	public static final Block SALTPETER_ORE = register("saltpeter_ore", new Block(Block.Properties.from(Blocks.IRON_ORE)));
+	public static final Block SALTPETER_ORE = register("saltpeter_ore", new OreBlock(Block.Properties.from(Blocks.IRON_ORE)));
 	public static final Block DRY_MUDBRICK = register("dry_mudbrick", new Block(Block.Properties.from(Blocks.COBBLESTONE)));
 	public static final Block WET_MUDBRICK = register("wet_mudbrick", new MudbrickBlock(Block.Properties.from(Blocks.DIRT).tickRandomly()));
 	public static final Block PADDY = register("paddy", new Block(Block.Properties.from(Blocks.DIRT)));
