@@ -41,7 +41,7 @@ public class GenerationRegistry {
 	
 	private static final Dual<Decoration, ConfiguredFeature<?, ?>> SALT_GEN = Dual.get(() -> {
 		ConfiguredPlacement<CountRangeConfig> var0 = Placement.COUNT_RANGE.configure(new CountRangeConfig(17, 5, 5, 60));
-		OreFeatureConfig var1 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Registry.SALTPETER_ORE.getDefaultState(), 10);
+		OreFeatureConfig var1 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Registry.SALTPETER_ORE.getDefaultState(), 15);
 		
 		return Dual.make(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(var1).withPlacement(var0));
 	});
