@@ -62,7 +62,7 @@ public class RyobaSawItem extends AxeItem {
 			if(var3 != null) {
 				Dual<Dual<IItemProvider, Integer>, Dual<IItemProvider, Integer>> var4 = RECIPES.get(var2);
 				
-				this.cutBlock(var0, var1, var3.isCrouching() ? var4.a() : var4.b());
+				this.cutBlock(var0, var1, !var3.isCrouching() ? var4.a() : var4.b());
 				
 				par0.getItem().damageItem(1, var3, var -> {
 					var.sendBreakAnimation(par0.getHand());

@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
+import com.google.common.collect.Multimap;
 
 import clevernucleus.adiectamateria.common.init.Registry;
 import net.minecraft.block.Block;
@@ -38,8 +38,8 @@ public class GrafterItem extends TieredItem {
 		
 		Builder<Attribute, AttributeModifier> var0 = ImmutableMultimap.builder();
 		
-		var0.put(Attributes.field_233823_f_, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0D, AttributeModifier.Operation.ADDITION));
-		var0.put(Attributes.field_233825_h_, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.0D, AttributeModifier.Operation.ADDITION));
+		var0.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0D, AttributeModifier.Operation.ADDITION));
+		var0.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.0D, AttributeModifier.Operation.ADDITION));
 		
 		this.attributes = var0.build();
 	}
