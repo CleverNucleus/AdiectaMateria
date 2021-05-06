@@ -44,18 +44,18 @@ public class RyobaSawItem extends AxeItem {
 	private void cutBlock(World par0, final BlockPos par1, final Dual<IItemProvider, Integer> par2) {
 		ItemEntity var0 = new ItemEntity(par0, par1.getX(), par1.getY(), par1.getZ(), new ItemStack(par2.a(), par2.b().intValue()));
 		
-		par0.setBlockState(par1, Blocks.AIR.getDefaultState(), 11);
-		par0.addEntity(var0);
+		par0.setBlock(par1, Blocks.AIR.defaultBlockState(), 11);
+		par0.addFreshEntity(var0);
 	}
 	
 	@Override
-	public ActionResultType onItemUse(ItemUseContext par0) {
-		World var0 = par0.getWorld();
-		BlockPos var1 = par0.getPos();
+	public ActionResultType useOn(ItemUseContext par0) {
+		World var0 = par0.getLevel();
+		BlockPos var1 = par0.getClickedPos();
 		Block var2 = var0.getBlockState(var1).getBlock();
 		
 		if(RECIPES.containsKey(var2)) {
-			if(var0.isRemote) return ActionResultType.PASS;
+			if(var0.isClientSide) return ActionResultType.PASS;
 			
 			PlayerEntity var3 = par0.getPlayer();
 			
@@ -64,16 +64,16 @@ public class RyobaSawItem extends AxeItem {
 				
 				this.cutBlock(var0, var1, !var3.isCrouching() ? var4.a() : var4.b());
 				
-				par0.getItem().damageItem(1, var3, var -> {
-					var.sendBreakAnimation(par0.getHand());
+				par0.getItemInHand().hurtAndBreak(1, var3, var -> {
+					var.broadcastBreakEvent(par0.getHand());
 				});
 				
-				var0.playSound((PlayerEntity)null, var1, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				var0.playSound((PlayerEntity)null, var1, SoundEvents.SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 			
 			return ActionResultType.SUCCESS;
 		}
 		
-		return super.onItemUse(par0);
+		return super.useOn(par0);
 	}
 }

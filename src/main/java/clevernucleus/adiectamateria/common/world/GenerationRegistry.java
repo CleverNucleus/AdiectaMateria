@@ -38,17 +38,17 @@ public class GenerationRegistry {
 	});
 	
 	private static final Dual<Decoration, ConfiguredFeature<?, ?>> SALT_GEN = Dual.get(() -> {
-		OreFeatureConfig var0 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, Registry.SALTPETER_ORE.getDefaultState(), 15);
+		OreFeatureConfig var0 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Registry.SALTPETER_ORE.defaultBlockState(), 15);
 		TopSolidRangeConfig var1 = new TopSolidRangeConfig(5, 0, 55);
-		ConfiguredFeature<?, ?> var2 = Feature.ORE.withConfiguration(var0).withPlacement(Placement.RANGE.configure(var1)).square().func_242731_b(15);
+		ConfiguredFeature<?, ?> var2 = Feature.ORE.configured(var0).decorated(Placement.RANGE.configured(var1)).squared().count(15);
 		
 		return Dual.make(Decoration.UNDERGROUND_ORES, var2);
 	});
 	
 	private static final Dual<Decoration, ConfiguredFeature<?, ?>> ENDSTONE_GEN = Dual.get(() -> {
-		OreFeatureConfig var0 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, Blocks.END_STONE.getDefaultState(), 10);
+		OreFeatureConfig var0 = new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Blocks.END_STONE.defaultBlockState(), 10);
 		TopSolidRangeConfig var1 = new TopSolidRangeConfig(1, 0, 25);
-		ConfiguredFeature<?, ?> var2 = Feature.ORE.withConfiguration(var0).withPlacement(Placement.RANGE.configure(var1)).square().func_242731_b(10);
+		ConfiguredFeature<?, ?> var2 = Feature.ORE.configured(var0).decorated(Placement.RANGE.configured(var1)).squared().count(10);
 		
 		return Dual.make(Decoration.UNDERGROUND_ORES, var2);
 	});

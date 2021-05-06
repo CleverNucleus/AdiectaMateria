@@ -42,7 +42,7 @@ public class SpindleItem extends Item {
 	});
 	
 	public SpindleItem(Properties par0) {
-		super(par0.defaultMaxDamage(25));
+		super(par0.defaultDurability(25));
 	}
 	
 	public void setFull(ItemStack par0, final boolean par1) {
@@ -61,25 +61,25 @@ public class SpindleItem extends Item {
 	}
 	
 	@Override
-	public ActionResultType onItemUse(ItemUseContext par0) {
-		World var0 = par0.getWorld();
-		BlockPos var1 = par0.getPos();
-		ItemStack var2 = par0.getItem();
+	public ActionResultType useOn(ItemUseContext par0) {
+		World var0 = par0.getLevel();
+		BlockPos var1 = par0.getClickedPos();
+		ItemStack var2 = par0.getItemInHand();
 		Block var3 = var0.getBlockState(var1).getBlock();
 		
 		if(!this.isFull(var2) && EFFECTIVE_ON.contains(var3)) {
-			if(!var0.isRemote) {
+			if(!var0.isClientSide) {
 				PlayerEntity var4 = par0.getPlayer();
 				
 				if(var4 == null) return ActionResultType.PASS;
 				
 				this.setFull(var2, true);
-				var0.setBlockState(var1, Blocks.AIR.getDefaultState(), 11);
-				par0.getItem().damageItem(1, var4, var -> {
-					var.sendBreakAnimation(par0.getHand());
+				var0.setBlock(var1, Blocks.AIR.defaultBlockState(), 11);
+				var2.hurtAndBreak(1, var4, var -> {
+					var.broadcastBreakEvent(par0.getHand());
 				});
 				
-				var0.playSound((PlayerEntity)null, var1, SoundEvents.BLOCK_WOOL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				var0.playSound((PlayerEntity)null, var1, SoundEvents.WOOL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 			
 			return ActionResultType.SUCCESS;
@@ -89,21 +89,21 @@ public class SpindleItem extends Item {
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World par0, PlayerEntity par1, Hand par2) {
-		ItemStack var0 = par1.getHeldItem(par2);
+	public ActionResult<ItemStack> use(World par0, PlayerEntity par1, Hand par2) {
+		ItemStack var0 = par1.getItemInHand(par2);
 		
-		if(par0.isRemote) return ActionResult.resultPass(var0);
-		if(!par1.isCrouching()) return ActionResult.resultPass(var0);
+		if(par0.isClientSide) return ActionResult.pass(var0);
+		if(!par1.isCrouching()) return ActionResult.pass(var0);
 		if(this.isFull(var0)) {
 			this.setFull(var0, false);
 			
-			ItemEntity var1 = new ItemEntity(par0, par1.getPosX(), par1.getPosY(), par1.getPosZ(), new ItemStack(Items.STRING, 4));
+			ItemEntity var1 = new ItemEntity(par0, par1.getX(), par1.getY(), par1.getZ(), new ItemStack(Items.STRING, 4));
 			
-			par0.addEntity(var1);
+			par0.addFreshEntity(var1);
 			
-			return ActionResult.resultSuccess(var0);
+			return ActionResult.success(var0);
 		}
 		
-		return ActionResult.resultPass(var0);
+		return ActionResult.pass(var0);
 	}
 }

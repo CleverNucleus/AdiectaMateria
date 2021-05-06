@@ -17,11 +17,11 @@ public class LootRegistry {
 	@SubscribeEvent
 	public static void addDrops(final LivingDropsEvent par0) {
 		LivingEntity var0 = par0.getEntityLiving();
-		World var1 = var0.world;
+		World var1 = var0.level;
 		
-		if(var1.isRemote) return;
+		if(var1.isClientSide) return;
 		if(var0 instanceof PlayerEntity) {
-			ItemEntity var2 = new ItemEntity(var1, var0.getPosX(), var0.getPosY(), var0.getPosZ(), new ItemStack(Registry.SOUL));
+			ItemEntity var2 = new ItemEntity(var1, var0.xo, var0.yo, var0.zo, new ItemStack(Registry.SOUL));
 			
 			par0.getDrops().add(var2);
 		}

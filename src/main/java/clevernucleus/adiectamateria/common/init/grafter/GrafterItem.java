@@ -1,13 +1,14 @@
 package clevernucleus.adiectamateria.common.init.grafter;
 
-import java.util.Arrays;
 import java.util.Collection;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
-import clevernucleus.adiectamateria.common.init.Registry;
+import clevernucleus.adiectamateria.common.util.Dual;
+import clevernucleus.adiectamateria.common.util.RandDistribution;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
@@ -20,6 +21,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.item.Items;
 import net.minecraft.item.TieredItem;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.IItemProvider;
@@ -29,8 +31,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class GrafterItem extends TieredItem {
-	private static final Collection<Block> EFFECTIVE_ON = Arrays.asList(Blocks.GRASS, Blocks.TALL_GRASS);
-	private static final IItemProvider[] DROPS = new IItemProvider[] {Registry.RICE, Registry.PLANT_FIBRE};
+	
+	public static final Multimap<Block, Dual<IItemProvider, Float>> USE_ON = ArrayListMultimap.create();
 	private final Multimap<Attribute, AttributeModifier> attributes;
 	
 	public GrafterItem(Properties par0) {
@@ -38,53 +40,75 @@ public class GrafterItem extends TieredItem {
 		
 		Builder<Attribute, AttributeModifier> var0 = ImmutableMultimap.builder();
 		
-		var0.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0D, AttributeModifier.Operation.ADDITION));
-		var0.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.0D, AttributeModifier.Operation.ADDITION));
+		var0.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 0.0D, AttributeModifier.Operation.ADDITION));
+		var0.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -3.0D, AttributeModifier.Operation.ADDITION));
 		
 		this.attributes = var0.build();
 	}
 	
-	private void cutBlock(World par0, BlockPos par1) {
-		par0.setBlockState(par1, Blocks.AIR.getDefaultState(), 11);
-		
-		if(random.nextInt(100) < 30) {
-			ItemEntity var0 = new ItemEntity(par0, par1.getX(), par1.getY(), par1.getZ(), new ItemStack(DROPS[random.nextInt(DROPS.length)].asItem(), 1));
+	private float fromUseOnMultimap(Collection<Dual<IItemProvider, Float>> par0, IItemProvider par1) {
+		for(Dual<IItemProvider, Float> var : par0) {
+			IItemProvider var0 = var.a();
+			float var1 = var.b().floatValue();
 			
-			par0.addEntity(var0);
+			if(var0 == par1) return var1;
+		}
+		
+		
+		return 0F;
+	}
+	
+	private void cutBlock(World par0, BlockPos par1, Block par2) {
+		par0.setBlock(par1, Blocks.AIR.defaultBlockState(), 11);
+		
+		Collection<Dual<IItemProvider, Float>> var0 = USE_ON.get(par2);
+		RandDistribution<IItemProvider> var1 = new RandDistribution<IItemProvider>(Items.AIR);
+		
+		for(Dual<IItemProvider, Float> var : var0) {
+			var1.add(var.a(), var.b().floatValue());
+		}
+		
+		IItemProvider var2 = var1.getDistributedRandom();
+		int var3 = Math.round(100F * fromUseOnMultimap(var0, var2));
+		
+		if(random.nextInt(100) < var3) {
+			ItemEntity var4 = new ItemEntity(par0, par1.getX(), par1.getY(), par1.getZ(), new ItemStack(var2, 1));
+			
+			par0.addFreshEntity(var4);
 		}
 	}
 	
 	@Override
-	public ActionResultType onItemUse(ItemUseContext par0) {
-		World var0 = par0.getWorld();
-		BlockPos var1 = par0.getPos();
+	public ActionResultType useOn(ItemUseContext par0) {
+		World var0 = par0.getLevel();
+		BlockPos var1 = par0.getClickedPos();
 		Block var2 = var0.getBlockState(var1).getBlock();
 		
-		if(EFFECTIVE_ON.contains(var2)) {
-			if(!var0.isRemote) {
+		if(USE_ON.containsKey(var2)) {
+			if(!var0.isClientSide) {
 				PlayerEntity var3 = par0.getPlayer();
 				
 				if(var3 == null) return ActionResultType.PASS;
 				
-				this.cutBlock(var0, var1);
+				this.cutBlock(var0, var1, var2);
 				
-				par0.getItem().damageItem(1, var3, var -> {
-					var.sendBreakAnimation(par0.getHand());
+				par0.getItemInHand().hurtAndBreak(1, var3, var -> {
+					var.broadcastBreakEvent(par0.getHand());
 				});
 				
-				var0.playSound((PlayerEntity)null, var1, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				var0.playSound((PlayerEntity)null, var1, SoundEvents.GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 			
-			return ActionResultType.SUCCESS;
+			return ActionResultType.sidedSuccess(var0.isClientSide);
 		}
 		
 		return ActionResultType.PASS;
 	}
 	
 	@Override
-	public boolean hitEntity(ItemStack par0, LivingEntity par1, LivingEntity par2) {
-		par0.damageItem(1, par2, var -> {
-			var.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+	public boolean hurtEnemy(ItemStack par0, LivingEntity par1, LivingEntity par2) {
+		par0.hurtAndBreak(1, par2, var -> {
+			var.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
 		});
 		
 		return true;
