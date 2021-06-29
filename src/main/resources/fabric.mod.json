@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "adiectamateria",
+	"version": "3.0.0",
+	"name": "AdiectaMateria",
+	"description": "A stepping stone vanilla+ mod.",
+	"authors": [
+		"CleverNucleus: code & major texturer;",
+        "Joe Williamson: CC0 textures;",
+        "Orteil: CC0 textures"
+	],
+    
+	"contact": {
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/adiecta-materia",
+        "sources": "https://github.com/CleverNucleus/AdiectaMateria",
+        "issues": "https://github.com/CleverNucleus/AdiectaMateria/issues"
+	},
+    
+	"license": "MIT",
+	"icon": "assets/adiectamateria/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.github.clevernucleus.adiectamateria.AdiectaMateria"
+		],
+		"client": [
+			
+		]
+	},
+    
+	"mixins": [
+		"adiectamateria.mixins.json"
+	],
+    
+	"depends": {
+		"fabricloader": ">=0.7.4",
+		"fabric": "*",
+		"minecraft": "1.16.x"
+	},
+    
+	"suggests": {
+		"another-mod": "*"
+	}
+}

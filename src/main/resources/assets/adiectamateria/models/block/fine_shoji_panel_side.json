@@ -1,7 +1,0 @@
-{
-    "parent": "block/template_glass_pane_side",
-    "textures": {
-        "edge": "adiectamateria:blocks/fine_shoji_panel_side",
-        "pane": "adiectamateria:blocks/fine_shoji_panel"
-    }
-}
